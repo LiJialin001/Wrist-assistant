@@ -1,4 +1,5 @@
 #include "main.h"
+#include "lvgl_project.h"
 
 max30102_config_t max30102 = {};
 
@@ -55,6 +56,13 @@ static void init_task_handler(void *pvParameters)
 	}
 #endif
 
+    i2c2_init();
+	cst816t_init();
+    lcd_init(SPI3_HOST, 80000000);
+    lv_init();
+    lvgl_Style_create();
+    lvgl_bpm_create(lv_scr_act());
+
     //Init I2C_NUM_0
     i2c_bpm_init();
     //Init sensor at I2C_NUM_0
@@ -83,12 +91,15 @@ static void init_task_handler(void *pvParameters)
 	while(1)
 	{
         //Update sensor, saving to "result"
-        ESP_ERROR_CHECK(max30102_update(&max30102, &result));
-        if(result.pulse_detected) {
-            printf("BEAT\n");
-            printf("BPM: %f | SpO2: %f%%\n", result.heart_bpm, result.spO2);
+        if(max30102_update(&max30102, &result)==ESP_OK) {
+            if(result.pulse_detected) {
+                printf("BEAT\n");
+                printf("BPM: %f | SpO2: %f%%\n", result.heart_bpm, result.spO2);
+            }
+        } else {
+            main_debug("MAX30102 not found\r\n");
         }
-		vTaskDelay(100 / portTICK_PERIOD_MS);
+		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
 
 	vTaskDelete(NULL);

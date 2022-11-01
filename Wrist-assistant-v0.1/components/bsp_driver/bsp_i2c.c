@@ -66,7 +66,7 @@ void bsp_i2c_test_task(void *pvParameter)
 
     uint8_t dummy;
     uint8_t data=0XA7;
-    uint8_t buf[]={0xA7,0X00};
+    // uint8_t buf[]={0xA7,0X00};
     uint8_t i=0;
 
     // i2c_read(twiAddress, 0x15, &dummy, 1);

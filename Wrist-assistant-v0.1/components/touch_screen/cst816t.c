@@ -1,7 +1,7 @@
 #include "cst816t.h"
 #include "bsp_i2c.h"
 
-uint8_t cst816t_read_len(uint16_t reg_addr,uint8_t *data,uint8_t len)
+uint8_t cst816t_read_len(uint8_t reg_addr,uint8_t *data,uint8_t len)
 {
     uint8_t res=0;
     res = i2c_master_write_read_device(I2C_PORT_NUM_TP, CST816T_ADDR, &reg_addr, 1, data, len, 1000 / portTICK_PERIOD_MS);
