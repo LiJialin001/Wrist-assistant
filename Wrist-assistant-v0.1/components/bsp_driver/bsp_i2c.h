@@ -20,6 +20,7 @@
 
 
 void i2c2_init(void);
+void i2c_bpm_init(void);
 void i2c2_uninit(void);
 
 

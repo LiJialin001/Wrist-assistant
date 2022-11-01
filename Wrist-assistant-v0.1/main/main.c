@@ -1,5 +1,23 @@
 #include "main.h"
 
+max30102_config_t max30102 = {};
+
+// void get_bpm(void* param) {
+//     printf("MAX30102 Test\n");
+//     max30102_data_t result = {};
+//     /*ESP_ERROR_CHECK(max30102_print_registers(&max30102));*/
+//     while(true) {
+//         //Update sensor, saving to "result"
+//         ESP_ERROR_CHECK(max30102_update(&max30102, &result));
+//         if(result.pulse_detected) {
+//             printf("BEAT\n");
+//             printf("BPM: %f | SpO2: %f%%\n", result.heart_bpm, result.spO2);
+//         }
+//         //Update rate: 100Hz
+//         vTaskDelay(10/portTICK_PERIOD_MS);
+//     }
+// }
+
 static void init_task_handler(void *pvParameters)
 {
 	main_debug("-------------开始初始化----------------\r\n");
@@ -37,10 +55,39 @@ static void init_task_handler(void *pvParameters)
 	}
 #endif
 
+    //Init I2C_NUM_0
+    i2c_bpm_init();
+    //Init sensor at I2C_NUM_0
+    if (max30102_init( &max30102, I2C_PORT_NUM_BPM,
+                   MAX30102_DEFAULT_OPERATING_MODE,
+                   MAX30102_DEFAULT_SAMPLING_RATE,
+                   MAX30102_DEFAULT_LED_PULSE_WIDTH,
+                   MAX30102_DEFAULT_IR_LED_CURRENT,
+                   MAX30102_DEFAULT_START_RED_LED_CURRENT,
+                   MAX30102_DEFAULT_MEAN_FILTER_SIZE,
+                   MAX30102_DEFAULT_PULSE_BPM_SAMPLE_SIZE,
+                   MAX30102_DEFAULT_ADC_RANGE, 
+                   MAX30102_DEFAULT_SAMPLE_AVERAGING,
+                   MAX30102_DEFAULT_ROLL_OVER,
+                   MAX30102_DEFAULT_ALMOST_FULL,
+                   false )==ESP_OK) {
+                        main_debug("MAX30102 Init OK\r\n");
+                   } else {
+                        main_debug("MAX30102 not found\r\n");
+                   }
 	main_debug("初始化结束\r\n");
+
+    printf("MAX30102 Test\n");
+    max30102_data_t result = {};
 
 	while(1)
 	{
+        //Update sensor, saving to "result"
+        ESP_ERROR_CHECK(max30102_update(&max30102, &result));
+        if(result.pulse_detected) {
+            printf("BEAT\n");
+            printf("BPM: %f | SpO2: %f%%\n", result.heart_bpm, result.spO2);
+        }
 		vTaskDelay(100 / portTICK_PERIOD_MS);
 	}
 
@@ -49,13 +96,13 @@ static void init_task_handler(void *pvParameters)
 }
 void app_main()
 {
+    xTaskCreate(init_task_handler,
+            "init_task_handler",
+            1024 * 10,
+            NULL,
+            configMAX_PRIORITIES-1,
+            NULL);
 
-  xTaskCreate(init_task_handler,
-              "init_task_handler",
-              1024 * 10,
-              NULL,
-              configMAX_PRIORITIES-1,
-              NULL);
 }
 
 void ptintf_memory(char *file,int len)

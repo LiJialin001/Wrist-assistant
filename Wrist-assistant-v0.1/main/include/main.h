@@ -8,7 +8,8 @@
 #include "nvs_flash.h"
 #include "esp_spi_flash.h"
 #include "esp_wifi.h"
-#include "esp_event_loop.h"
+// #include "esp_event_loop.h"
+#include "esp_event.h"
 #include "esp_log.h"
 #include "esp_err.h"
 #include <esp_log.h>
@@ -30,11 +31,15 @@
 #include "freertos/event_groups.h"
 #include "freertos/semphr.h"
 
+#include "bsp_i2c.h"
+
 // 显示屏
 #include "cst816t.h"
 #include "lcd.h"
-#include "bsp_i2c.h"
 #include "lvgl.h"
+
+// 心率血氧
+#include "max30102.h"
 
 
 #if 1

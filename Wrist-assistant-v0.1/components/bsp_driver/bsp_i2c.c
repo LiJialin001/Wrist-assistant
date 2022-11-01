@@ -27,6 +27,20 @@
 
 // }
 
+static esp_err_t i2c_bpm_master_init(void)
+{
+    int i2c_port = I2C_PORT_NUM_BPM;
+    i2c_config_t conf = {};
+    conf.mode = I2C_MODE_MASTER;
+    conf.sda_io_num = GPIO_BPM_I2C_SDA;
+    conf.scl_io_num = GPIO_BPM_I2C_SCL;
+    conf.sda_pullup_en = GPIO_PULLUP_ENABLE;
+    conf.scl_pullup_en = GPIO_PULLUP_ENABLE;
+    conf.master.clk_speed = I2C_FRQ;
+    i2c_param_config(i2c_port, &conf);
+    return i2c_driver_install(i2c_port, I2C_MODE_MASTER, 0, 0, 0);
+}
+
 
 static esp_err_t i2c2_master_init(void)
 {
@@ -80,6 +94,18 @@ void bsp_i2c_test_task(void *pvParameter)
 	vTaskDelete(NULL);
 }
 
+void i2c_bpm_init(void)
+{
+    if(i2c_bpm_master_init()==ESP_OK)
+    {
+        bsp_i2c_debug("i2c_bpm初始化成功\r\n");
+        //xTaskCreate(bsp_i2c_test_task,"bsp_i2c_test_task",1024*5,NULL,12,NULL);
+    }else
+    {
+        bsp_i2c_debug("i2c_bpm初始化失败\r\n");
+    }
+
+}
 
 void i2c2_init(void)
 {
