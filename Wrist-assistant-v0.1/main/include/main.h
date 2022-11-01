@@ -30,6 +30,12 @@
 #include "freertos/event_groups.h"
 #include "freertos/semphr.h"
 
+// 显示屏
+#include "cst816t.h"
+#include "lcd.h"
+#include "bsp_i2c.h"
+#include "lvgl.h"
+
 
 #if 1
 #define my_debug( tag, format, ... ) \
