@@ -3,61 +3,23 @@
 
 max30102_config_t max30102 = {};
 
-// void get_bpm(void* param) {
-//     printf("MAX30102 Test\n");
-//     max30102_data_t result = {};
-//     /*ESP_ERROR_CHECK(max30102_print_registers(&max30102));*/
-//     while(true) {
-//         //Update sensor, saving to "result"
-//         ESP_ERROR_CHECK(max30102_update(&max30102, &result));
-//         if(result.pulse_detected) {
-//             printf("BEAT\n");
-//             printf("BPM: %f | SpO2: %f%%\n", result.heart_bpm, result.spO2);
-//         }
-//         //Update rate: 100Hz
-//         vTaskDelay(10/portTICK_PERIOD_MS);
-//     }
-// }
 
 static void init_task_handler(void *pvParameters)
 {
 	main_debug("-------------开始初始化----------------\r\n");
 	main_debug("编译时间:%s %s\r\n", __DATE__, __TIME__);
-	main_debug("esp32 sdk version :%s\r\n", esp_get_idf_version());
+	// main_debug("esp32 sdk version :%s\r\n", esp_get_idf_version());
 
 	// bsp_key_init();
 
-#if 0 //测试用
-	gpio_set_direction(IO_POWER_PIN, GPIO_MODE_OUTPUT);
-	gpio_set_direction(IO_LCD_BL_PIN, GPIO_MODE_OUTPUT);
-	gpio_set_level(IO_LCD_BL_PIN, 0);
-
-	uint32_t key_press_count=0;
-	while(1)
-	{
-		main_debug("开机计数:%d",key_press_count);
-		bsp_power_off();
-		if(bsp_key_read_power_gpio())
-		{
-			if(++key_press_count > 5)
-			{
-				main_debug("按键开机");
-				break;
-			}
-		}else
-		{
-			main_debug("进入休眠");
-			gpio_set_level(IO_POWER_PIN, 1);
-			bsp_power_sleep();
-			key_press_count = 0;
-		}
-
-		vTaskDelay(pdMS_TO_TICKS(100));
-	}
-#endif
-    bsp_power_init();
+    // bsp_power_init();
     bsp_ledc_init();
 
+    // mpu6050
+    i2c_mpu6050_init();
+    mpu6050_init();
+
+    // lcd
     i2c2_init();
 	cst816t_init();
     lcd_init(SPI3_HOST, 80000000);
@@ -94,6 +56,8 @@ static void init_task_handler(void *pvParameters)
     printf("MAX30102 Test\n");
     max30102_data_t result = {};
 
+    measurement_out_t measurement_out;
+
 	while(1)
 	{
         //Update sensor, saving to "result"
@@ -105,7 +69,14 @@ static void init_task_handler(void *pvParameters)
         // } else {
         //     main_debug("MAX30102 not found\r\n");
         // }
-		vTaskDelay(10 / portTICK_PERIOD_MS);
+        measurement_out = mpu6050_get_value();
+        // printf("accel_xout:%d\t;", measurement_out.accel_out.accel_xout);
+        // printf("accel_yout:%d\t;", measurement_out.accel_out.accel_yout);
+        // printf("accel_zout:%d;\n", measurement_out.accel_out.accel_zout);
+        printf("gyro_xout:%d\t;", measurement_out.gyro_out.gyro_xout);
+        printf("gyro_yout:%d\t;", measurement_out.gyro_out.gyro_yout);
+        printf("gyro_zout:%d;\n", measurement_out.gyro_out.gyro_zout);
+		vTaskDelay(100 / portTICK_PERIOD_MS);
 	}
 
 	vTaskDelete(NULL);

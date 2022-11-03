@@ -47,6 +47,9 @@
 // 心率血氧
 #include "max30102.h"
 
+// mpu6050
+#include "mpu6050.h"
+
 
 #if 1
 #define my_debug( tag, format, ... ) \

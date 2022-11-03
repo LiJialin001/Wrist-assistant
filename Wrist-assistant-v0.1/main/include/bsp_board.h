@@ -30,9 +30,16 @@
 #define GPIO_LED_R      (GPIO_NUM_5)
 #define GPIO_LED_G      (GPIO_NUM_6)
 
+// MPU6050
+#define MPU6050_I2C_PORT_NUM (2)
+#define MPU6050_I2C_SDA    (GPIO_NUM_19)
+#define MPU6050_I2C_SCL   (GPIO_NUM_18)
+#define MPU6050_I2C_FREQ 400000
+#define MPU6050_ADDR 0x68  //器件地址： b110100(AD0) 
 
-#define UART_PORT_NUM   (UART_NUM_1)
-#define GPIO_UART_TX    (GPIO_NUM_17)
-#define GPIO_UART_RX    (GPIO_NUM_18)
-#define GPIO_UART_RTS   (GPIO_NUM_NC)
-#define GPIO_UART_CTS   (GPIO_NUM_NC)
+#define WRITE_BIT I2C_MASTER_WRITE  //I2C master write 
+#define READ_BIT I2C_MASTER_READ    //I2C master read 
+#define ACK_CHECK_EN 0x1            //I2C master will check ack from slave
+#define ACK_CHECK_DIS 0x0           //I2C master will not check ack from slave 
+#define ACK_VAL 0x0                 //I2C ack value 
+#define NACK_VAL 0x1                //I2C nack value    

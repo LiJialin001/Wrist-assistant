@@ -7,25 +7,23 @@
 
 
 
-// static esp_err_t i2c2_read_bytes(uint8_t device_addr,uint8_t reg_addr, uint8_t *data, size_t len)
-// {
-//     return i2c_master_write_read_device(I2C_PORT_NUM_TP, device_addr, &reg_addr, 1, data, len, I2C_MASTER_TIMEOUT_MS / portTICK_PERIOD_MS);
-// }
+static esp_err_t i2c_mpu6050_master_init(void)
+{
+    i2c_config_t conf = {
+        .mode = I2C_MODE_MASTER,
+        .sda_io_num = MPU6050_I2C_SDA,         // select GPIO specific to your project
+        .scl_io_num = MPU6050_I2C_SCL,         // select GPIO specific to your project
+        .sda_pullup_en = GPIO_PULLUP_ENABLE,
+        .scl_pullup_en = GPIO_PULLUP_ENABLE,
+        .master.clk_speed = MPU6050_I2C_FREQ,  // select frequency specific to your project
+        // .clk_flags = 0,          /*!< Optional, you can use I2C_SCLK_SRC_FLAG_* flags to choose i2c source clock here. */
+    };
+    
+    i2c_param_config(MPU6050_I2C_PORT_NUM, &conf);
 
+    return i2c_driver_install(MPU6050_I2C_PORT_NUM, I2C_MODE_MASTER, 0, 0, 0);
+}
 
-// static esp_err_t i2c2_write_bytes(uint8_t device_addr,uint8_t reg_addr, uint8_t data)
-// {
-//     // int ret;
-//     // uint8_t write_buf[2] = {reg_addr, data};
-
-//     // ret = i2c_master_write_to_device(I2C_PORT_NUM_TP, device_addr, write_buf, sizeof(write_buf), I2C_MASTER_TIMEOUT_MS / portTICK_PERIOD_MS);
-
-//     // return ret;
-
-//     return i2c_master_write_read_device(I2C_PORT_NUM_TP, device_addr, &reg_addr, 1, data, len, I2C_MASTER_TIMEOUT_MS / portTICK_PERIOD_MS);
-
-
-// }
 
 static esp_err_t i2c_bpm_master_init(void)
 {
@@ -103,6 +101,19 @@ void i2c_bpm_init(void)
     }else
     {
         bsp_i2c_debug("i2c_bpm初始化失败\r\n");
+    }
+
+}
+
+void i2c_mpu6050_init(void)
+{
+    if(i2c_mpu6050_master_init()==ESP_OK)
+    {
+        bsp_i2c_debug("i2c_mpu6050初始化成功\r\n");
+        //xTaskCreate(bsp_i2c_test_task,"bsp_i2c_test_task",1024*5,NULL,12,NULL);
+    }else
+    {
+        bsp_i2c_debug("i2c_mpu6050初始化失败\r\n");
     }
 
 }

@@ -112,17 +112,17 @@ void bsp_power_sleep(void)
 }
 void bsp_power_init(void)
 {
-	bap_power_debug("开始初始化");
-	//gpio_reset_pin(IO_POWER_PIN);
-	gpio_set_direction(IO_POWER_PIN, GPIO_MODE_OUTPUT);
-	gpio_set_direction(IO_LCD_BL_PIN, GPIO_MODE_OUTPUT);
-	gpio_set_level(IO_LCD_BL_PIN, 0);
+	// bap_power_debug("开始初始化");
+	// //gpio_reset_pin(IO_POWER_PIN);
+	// gpio_set_direction(IO_POWER_PIN, GPIO_MODE_OUTPUT);
+	// gpio_set_direction(IO_LCD_BL_PIN, GPIO_MODE_OUTPUT);
+	// gpio_set_level(IO_LCD_BL_PIN, 0);
 
-	// gpio_pullup_dis(IO_POWER_PIN);
-	// gpio_pulldown_dis(IO_POWER_PIN);
-	gpio_set_pull_mode(IO_POWER_PIN,GPIO_PULLUP_ONLY);
+	// // gpio_pullup_dis(IO_POWER_PIN);
+	// // gpio_pulldown_dis(IO_POWER_PIN);
+	// gpio_set_pull_mode(IO_POWER_PIN,GPIO_PULLUP_ONLY);
 
-	bsp_power_on();
+	// bsp_power_on();
 
 	// if(bsp_key_read_power_gpio()==0)
 	// {
