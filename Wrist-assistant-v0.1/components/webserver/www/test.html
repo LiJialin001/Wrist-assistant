@@ -1,0 +1,392 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <!-- <meta http-equiv="refresh" content="1">    -->
+    <title>ESP32桌面天气预报</title>
+    <link rel="stylesheet" type="text/css">
+    <!-- <link rel="stylesheet" type="text/css"> href="test.css" -->
+    <style>
+         body{
+            font-family: 'Montserrat', sans-serif;
+            margin:0;
+            background-color: rgba(29, 29, 29, 1);
+            /* background-image: linear-gradient(to right, #f6d365 0%, #fda085 51%, #f6d365 100%); */
+        }     
+        TEXT{
+            width: 150px;/*宽度*/
+            height: 50px;/*高度*/
+            color:white;/*字体颜色*/
+            background-color:rgba(100, 148, 237, 0);/*背景颜色*/
+            border-radius: 0px;/*圆角*/
+            border-width: 5;/*边框*/
+            margin: 0;
+            outline: none;/*取消轮廓*/
+            font-family: 楷体;/*字体*/
+            font-size: 24px;/*字体大小*/
+            text-align: center;/*字体居中*/
+            text-transform: uppercase;
+            cursor: auto;/*鼠标箭头*/
+            display: block;
+            float: left;
+            line-height: 40px;         
+        }
+        TEXT:hover{/*鼠标移动时的颜色变化*/
+            
+            color:rgb(91, 2, 255);/*字体颜色*/
+            background-color: rgba(250, 235, 215, 0);
+        }
+        .button111{
+          width: 150px;/*宽度*/
+          height: 50px;/*高度*/
+          color:white;/*字体颜色*/
+          background-color:rgb(100, 149, 237);/*背景颜色*/
+          background-size: 200% auto;
+          border-radius: 5px;/*圆角*/
+          border-width: 0px;/*边框*/
+          margin: 0;
+          outline: none;/*取消轮廓*/
+          font-family: 楷体;/*字体*/
+          font-size: 24px;/*字体大小*/
+          text-align: center;/*字体居中*/
+          cursor: pointer;/*鼠标箭头*/
+          display: block;/*设置段落生成一个行内框*/
+          line-height: 40px;  
+          margin: 0px 0px 0px 0px;/*设置一个p元素的所有四个边距*/
+          padding: 0px;/*设置一个P元素的填充*/
+          transition: 0.5s;
+          text-shadow:0 0 2px rgba(0, 0, 0, 0.993);/*文字阴影*/
+          box-shadow: 0 0 10px rgba(12, 63, 233, 0.603);
+          animation: load 1.5s infinite alternate;  
+        }
+        .button111:hover{/*鼠标移动时的颜色变化*/
+            
+            color:rgb(255, 255, 255);/*字体颜色*/
+            background-color:rgb(33, 104, 236);
+            background-position: right center;
+        }
+        @keyframes load {
+          0% {
+            box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255, 0), 0px 0px 10px 3px rgba(0, 255, 140, 0.5);
+          }
+          100% {
+            box-shadow: inset 0px 0px 0px 5px rgba(255, 255, 255, 0), 0px 0px 20px 3px rgba(0, 255, 140, 0.8);
+          }
+        }
+
+
+        .text_input{
+            width: 100px;/*宽度*/
+            height: 50px;/*高度*/
+            color:rgb(0, 0, 0);/*字体颜色*/
+            background-color:rgb(255, 255, 255);/*背景颜色*/
+            border-radius: 5px;/*圆角*/
+            border-width: 1;/*边框*/
+            margin: 0;
+            outline: none;/*轮廓*/
+            font-family: 黑体;/*字体*/
+            font-size: 24px;/*字体大小*/
+            text-align: center;/*字体居中*/
+            cursor: auto;/*鼠标箭头*/
+        }
+        .text_input:hover{/*鼠标移动时的颜色变化*/
+            
+            color:rgb(100, 0, 255);/*字体颜色*/
+            background-color: rgb(255, 255, 255);
+        }    
+
+
+  .wifi_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 80vw;
+    margin: 0 auto;
+    min-height: 100vh;
+  }  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 80vw;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+  .btn {
+    flex: 1 1 auto;
+    margin: 10px;
+    padding: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color:white;/*字体颜色*/
+   /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+    cursor: pointer;/*箭头手势*/
+    background-color:cornflowerblue;/*背景颜色*/
+    border-radius: 30px;/*圆角*/
+    border-width: 0;/*边框*/    
+   }
+  .btn:hover {
+    background-position: right center; /* change the direction of the change here */
+  }
+  
+  .btn-1 {
+    background-image: linear-gradient(to right, #47ff65 0%, #00ffff 51%, #c808f8 100%);
+  }
+   
+    </style>    
+</head>
+ 
+<body>
+ <!-- wifi输入框class="wifi_container" --> 
+  <div>
+    <form id="form1" method="post" action="echo">
+    <br/><br/><br/><br/><br/>
+    <TEXT class='TEXT' style='color:white;display: block;float: left;line-height: 40px;text-align: right;'>WIFI名称：</TEXT>  
+    <input 
+    class='text_input'
+    type='text' 
+    id='wifi_name' 
+    name='wifi_name' 
+    style='font-size: 24px;font-family: 楷体;width:200px;height: 40px;float: left; margin: 0 0 0 0' 
+    value=''
+    maxlength="100"
+    ></input>
+    <br/><br/><br/>
+    <TEXT class='TEXT' style='color:white;display: block;float: left;line-height: 40px;text-align: right;'>WIFI密码：</TEXT>  
+    <input
+    class='text_input' 
+    type='text' 
+    id='wifi_password' 
+    name='wifi_password'  
+    style='font-size: 24px;font-family: 楷体;width:200px;height: 40px;float: left; margin: 0 0 0 0' 
+    value=''
+    maxlength="100"
+    ></input>  
+    <br/><br/><br/>
+    <a onclick='OK_BUTTON_Click();' class='button111 btn-1 ' name="save" style='border-radius: 10px;width: 300px;height: 50px;margin: 0px 0px 0px 30px;'>保存</a>
+  </form>
+  </div>
+  <div class="container">
+      <a onclick = "Button1_onclick()" class="btn btn-1">刷新天气</a>
+      <a onclick = "Button2_onclick();" class="btn btn-1">重启</a>
+      <a onclick = "doFormRequest('echo','post',{'key1':'value2', 'key2':'value2'})" class="btn btn-1">按钮3</a> 
+      <a id='button_4' class="btn btn-1">按钮4</a> 
+      <a class="btn btn-1">按钮5</a>       
+  </div>                
+</body>
+</html>
+
+<script type="text/javascript">
+
+var baseHost = document.location.origin  //获取URL域名（ip）与端口号
+var streamUrl = baseHost + ':81'	//esp32 摄像头arduino例程 摄像头流数据端口
+
+document.getElementById("button_4").onclick = function(){
+            alert("button_4被按下");
+        }
+
+//onload - 页面加载后
+this.onload=function(){
+ // alert("页面已加载");
+ console.log("页面已加载")
+
+}
+
+//----定时器----//
+//setInterval() ：按照指定的周期（以毫秒计）来调用函数或计算表达式。方法会不停地调用函数，直到 clearInterval() 被调用或窗口被关闭。
+//setTimeout() ：在指定的毫秒数后调用函数或计算表达式。
+  var int=self.setInterval("clock()",1000);
+  function clock()
+  {
+    var date=new Date();
+    var time=date.toLocaleTimeString();
+    var dat=date.toLocaleDateString();
+    // document.getElementById("wifi_name").value=time;
+    // document.getElementById("wifi_password").value=dat;
+  }
+  //----定时器----//
+
+
+
+  
+//获取text
+  // fetch("status")
+  // .then((res) => res.text())//注意：此处是res.text()
+  // .then(data => {
+  //   console.log(data);
+  //   document.getElementById('wifi_name').value = data;
+  // })
+  // .catch(err => console.log(err));
+//获取json
+  // fetch("status")
+  // .then((res) => res.json())//注意：此处是res.text()
+  // .then(data => {
+  //   console.log(data.wifi_name);
+  //   //alert('初始化'+data.wifi_name);//弹出对话框
+  //   document.getElementById('wifi_name').value = data.wifi_name;
+  //   document.getElementById('wifi_password').value = data.wifi_password;
+  // })
+  // .catch(err => console.log(err));
+
+
+  fetch("status").then(function(response) {
+  response.json().then(function(data) {
+    //alert('初始化'+json.wifi_name+json.wifi_password);//弹出对话框
+    document.getElementById('wifi_name').value = data.wifi_name;
+    document.getElementById('wifi_password').value = data.wifi_password;    
+  });
+});
+
+
+
+
+//fetch发送get
+  function fetch_send_get(query,data) 
+  {
+
+    // var text = '{ "employees" : [' +
+    // '{ "firstName":"Bill" , "lastName":"Gates" },' +
+    // '{ "firstName":"Steve" , "lastName":"Jobs" },' +
+    // '{ "firstName":"Alan" , "lastName":"Turing" } ]}';
+
+    // return text;
+    var str = query+data
+    if(query==undefined && data==undefined)
+    {
+      console.log(`fetch_send_get参数错误`)
+      return false;
+    }
+    if(data == undefined)
+      str =query
+
+    fetch(str)
+    .then(function(response){
+      console.log(`请求 ${str} 完成, 返回的状态: ${response.status}`)
+      if(response.status==200)
+      {
+        console.log(`请求成功!`)
+        return response.status
+      }else if(response.status==400)
+      {
+        console.log(`请求失败!`)
+        return false
+      }
+      
+    })
+    .catch(function(err) {
+      console.log('fetch_send_get err!:'+err)
+      return false
+    })
+  } 
+
+
+  function Button1_onclick() 
+  {
+
+    const query = baseHost+"/shuaxin"
+    fetch(query)
+    .then(function(response){
+        console.log(`请求 ${query} 完成, 返回的状态: ${response.status}`);
+      });
+  } 
+
+function Button2_onclick() 
+{
+  var res = fetch_send_get('reset');
+  if(res==false)
+  {
+    alert(`重启失败!`)
+    
+
+  }else
+  {
+    alert(`重启成功!`)
+  }
+} 
+
+/*
+* @url: url link
+* @action: "get", "post"
+* @json: {'key1':'value2', 'key2':'value2'} 
+*/
+  function doFormRequest(url, action, json)
+  {
+    var form = document.createElement("form");
+    form.action = url;
+    form.method = action;
+    //添加输入属性和价值
+    for (var key in json)
+    {
+      if (json.hasOwnProperty(key))
+      {
+        var val = json[key];
+        input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = val;
+        // append key-value to form
+        form.appendChild(input)
+      }
+    }
+    //发送post请求
+    document.body.appendChild(form);
+    form.submit();
+    //form.ajaxSubmit(options);
+    //删除
+    document.body.removeChild(form);
+    return false;
+  }
+
+  function OK_BUTTON_Click() {
+        console.log('保存按钮被按下');
+        //alert('保存按钮按下');//弹出对话框
+        if(document.getElementById("wifi_name").value.length<=0)
+        {
+          alert('请输入wifi名称');//弹出对话框
+          return false;
+        }
+        if(document.getElementById("wifi_password").value.length<=0)
+        {
+          alert('请输入wifi密码');//弹出对话框
+          return false;
+        }
+        console.log(document.getElementById("wifi_name").value);//获取输入框的值  
+        var val1 = document.getElementById("wifi_name").value;
+        var val2 = document.getElementById("wifi_password").value;
+        //doFormRequest('echo','post',{'key1':val1, 'key2':val2}); 
+
+        var res = fetch_send_get('set_wifi?','wifi_name='+val1+'&wifi_password='+val2);
+
+        if(res==false)
+        {
+          alert(`保存失败!`)
+          
+
+        }else
+        {
+          alert(`保存成功!`)
+        }
+
+        // if(res==true)
+        // {
+        //   alert('保存成功!');//弹出对话框
+        // }
+    }
+    function btn1_Click() {
+        console.log('按钮1被按下');
+        //alert(document.getElementById("wifi_name").value);//弹出对话框
+        //console.log(document.getElementById("wifi_name").value);//获取输入框的值  
+        //window.location.href=document.getElementById("wifi_name").value;
+        // url = window.location.hostname;//"http://192.168.30.1:800"
+        // request = new XMLHttpRequest();
+        // request.open("POST", url);
+        // request.send("button1");
+        // window.location.href=123;
+    }   
+  </script>

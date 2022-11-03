@@ -5,8 +5,6 @@ const char * lvgl_globa_text[][10]=
 /*0000*/	{ "暂时还没有添加", "暫時還沒有添加", "Not added yet", "null","null","null","null","null","null","null"},
 /*0001*/ 	{"更新时间...","更新時間...","update time...","null","null","null","null","null","null","null"},
 /*0002*/	{ "天气", "天氣", "Weather","null","null","null","null","null","null","null"},
-/*0003*/	{ "B站", "B站", "bilibili","null","null","null","null","null","null","null"},
-/*0004*/	{ "黄历", "黃曆", "HuangLi","null","null","null","null","null","null","null"},
 /*0005*/	{ "设置", "設定", "Set","null","null","null","null","null","null","null"},
 /*0006*/	{ "日历", "日曆", "Cal","null","null","null","null","null","null","null"},
 /*0007*/	{ "游戏", "遊戲", "Game","null","null","null","null","null","null","null"},

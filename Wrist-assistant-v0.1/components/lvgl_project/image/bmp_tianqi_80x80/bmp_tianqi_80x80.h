@@ -1,0 +1,49 @@
+#ifndef __bmp_tianqi_80x80_h__
+#define __bmp_tianqi_80x80_h__
+#include "lvgl/lvgl.h"
+
+
+LV_IMG_DECLARE(bmp_tianqi_80x80_0)
+LV_IMG_DECLARE(bmp_tianqi_80x80_1)
+LV_IMG_DECLARE(bmp_tianqi_80x80_2)
+LV_IMG_DECLARE(bmp_tianqi_80x80_3)
+LV_IMG_DECLARE(bmp_tianqi_80x80_4)
+LV_IMG_DECLARE(bmp_tianqi_80x80_5)
+LV_IMG_DECLARE(bmp_tianqi_80x80_6)
+LV_IMG_DECLARE(bmp_tianqi_80x80_7)
+LV_IMG_DECLARE(bmp_tianqi_80x80_8)
+LV_IMG_DECLARE(bmp_tianqi_80x80_9)
+LV_IMG_DECLARE(bmp_tianqi_80x80_10)
+LV_IMG_DECLARE(bmp_tianqi_80x80_11)
+LV_IMG_DECLARE(bmp_tianqi_80x80_12)
+LV_IMG_DECLARE(bmp_tianqi_80x80_13)
+LV_IMG_DECLARE(bmp_tianqi_80x80_14)
+LV_IMG_DECLARE(bmp_tianqi_80x80_15)
+LV_IMG_DECLARE(bmp_tianqi_80x80_16)
+LV_IMG_DECLARE(bmp_tianqi_80x80_17)
+LV_IMG_DECLARE(bmp_tianqi_80x80_18)
+LV_IMG_DECLARE(bmp_tianqi_80x80_19)
+LV_IMG_DECLARE(bmp_tianqi_80x80_20)
+LV_IMG_DECLARE(bmp_tianqi_80x80_21)
+LV_IMG_DECLARE(bmp_tianqi_80x80_22)
+LV_IMG_DECLARE(bmp_tianqi_80x80_23)
+LV_IMG_DECLARE(bmp_tianqi_80x80_24)
+LV_IMG_DECLARE(bmp_tianqi_80x80_25)
+LV_IMG_DECLARE(bmp_tianqi_80x80_26)
+LV_IMG_DECLARE(bmp_tianqi_80x80_27)
+LV_IMG_DECLARE(bmp_tianqi_80x80_28)
+LV_IMG_DECLARE(bmp_tianqi_80x80_29)
+LV_IMG_DECLARE(bmp_tianqi_80x80_30)
+LV_IMG_DECLARE(bmp_tianqi_80x80_31)
+LV_IMG_DECLARE(bmp_tianqi_80x80_32)
+LV_IMG_DECLARE(bmp_tianqi_80x80_33)
+LV_IMG_DECLARE(bmp_tianqi_80x80_34)
+LV_IMG_DECLARE(bmp_tianqi_80x80_35)
+LV_IMG_DECLARE(bmp_tianqi_80x80_36)
+LV_IMG_DECLARE(bmp_tianqi_80x80_37)
+LV_IMG_DECLARE(bmp_tianqi_80x80_38)
+LV_IMG_DECLARE(bmp_tianqi_80x80_99)
+extern const lv_img_dsc_t *bmp_tianqi_80x80_buf[39];
+
+#endif
+

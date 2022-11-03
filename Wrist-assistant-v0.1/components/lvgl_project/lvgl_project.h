@@ -7,15 +7,25 @@
 #include "math.h"
 
 
+#include "font.h"
 
 #include "lvgl.h"
+#include "lvgl_port.h"
 #include "lv_gif.h"
 #include "lv_png.h"
+#include "my_system.h"
 
-#include "lvgl_global.h"
+#include "bmp_tianqi_40x40.h"
+#include "bmp_tianqi_80x80.h"
+#include "bmp_ShuaXin.h"
 
 #include "lvgl_bpm.h"
+#include "lvgl_hint.h"
 #include "lvgl_style.h"
+#include "lvgl_global.h"
+#include "lvgl_clock.h"
+#include "lvgl_ShuaXin.h"
+#include "lvgl_TianQi.h"
 
 
 #define win32 0

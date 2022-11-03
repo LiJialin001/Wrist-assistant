@@ -8,7 +8,6 @@
 #include "nvs_flash.h"
 #include "esp_spi_flash.h"
 #include "esp_wifi.h"
-// #include "esp_event_loop.h"
 #include "esp_event.h"
 #include "esp_log.h"
 #include "esp_err.h"
@@ -31,10 +30,28 @@
 #include "freertos/event_groups.h"
 #include "freertos/semphr.h"
 
+#include "nvs.h"
+#include "my_system.h"
+#include "system_config_data.h"
+#include "mynvs.h"
+
 #include "bsp_i2c.h"
 #include "bsp_ledc.h"
 #include "bsp_power.h"
 #include "bsp_key.h"
+
+#include "wifi.h"
+
+#include "webserver.h"
+
+#include "https_shijian.h"
+#include "https_tianqi.h"
+#include "https_riluo.h"
+#include "https_kongqi.h"
+#include "https_chengshi.h"
+#include "https_ip.h"
+#include "https.h"
+#include "user_http_s.h"
 
 
 // 显示屏

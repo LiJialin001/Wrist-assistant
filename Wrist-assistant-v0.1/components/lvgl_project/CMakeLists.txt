@@ -2,15 +2,35 @@
 idf_component_register(
     SRC_DIRS
     "."
+    "font"
     "lvgl_bpm"
     "lvgl_Some_style"
     "lvgl_global"
+    "lvgl_clock"
+    "lvgl_ShuaXin"
+    "lvgl_hint"
+    "lvgl_TianQi"
+    "image"
+    "image/bmp_ShuaXin"
+    "image/bmp_tianqi_40x40"
+    "image/bmp_tianqi_80x80"
+    "image/gif"
 
 
     INCLUDE_DIRS
     "."
+    "font"
     "lvgl_bpm"
     "lvgl_Some_style"
     "lvgl_global"
+    "lvgl_clock"
+    "lvgl_ShuaXin"
+    "lvgl_hint"
+    "lvgl_TianQi"
+    "image"
+    "image/bmp_ShuaXin"
+    "image/bmp_tianqi_40x40"
+    "image/bmp_tianqi_80x80"
+    "image/gif"
 
-    REQUIRES lvgl main)
+    REQUIRES lvgl main my_system json wpa_supplicant)
