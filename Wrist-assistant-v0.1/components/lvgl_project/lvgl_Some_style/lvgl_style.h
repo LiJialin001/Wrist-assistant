@@ -5,6 +5,8 @@
 
 #define style_moren_bg LV_COLOR_MAKE(0x00, 0x00, 0x00)
 
+
+
 typedef struct
 {
 	char buf[20];

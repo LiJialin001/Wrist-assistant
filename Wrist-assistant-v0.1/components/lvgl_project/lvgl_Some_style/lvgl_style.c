@@ -28,4 +28,6 @@ void lvgl_Style_create(void)
 	/*调整渐变色位置*/
 	lv_style_set_bg_main_stop(&lvgl_WuBianKuang_cont_style, LV_STATE_DEFAULT, 10);
 	lv_style_set_bg_main_stop(&lvgl_WuBianKuang_cont_style, LV_STATE_DEFAULT, 100);
+
+	
 }
