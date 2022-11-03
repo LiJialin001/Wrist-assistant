@@ -32,11 +32,17 @@
 #include "freertos/semphr.h"
 
 #include "bsp_i2c.h"
+#include "bsp_ledc.h"
+#include "bsp_power.h"
+#include "bsp_key.h"
+
 
 // 显示屏
 #include "cst816t.h"
 #include "lcd.h"
 #include "lvgl.h"
+#include "lvgl_port.h"
+#include "lv_port_fs.h"
 
 // 心率血氧
 #include "max30102.h"

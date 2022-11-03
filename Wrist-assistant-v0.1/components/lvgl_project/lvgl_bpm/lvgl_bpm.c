@@ -22,6 +22,65 @@ uint32_t bpm_Label_color[][2]=
 	{0Xff00ff,0Xbc0cc1},{0X8cc63f,0X678931}
 };
 
+void lvgl_bpm_event_cb(struct _lv_obj_t * obj, lv_event_t event)
+{
+	if (obj == lvgl_bpm_main_cont)
+	{
+		//desktop_debug("cb:%d\r\n", event);
+		switch (event)
+		{
+
+		case LV_EVENT_DELETE:
+
+
+			break;
+
+		case LV_EVENT_PRESSING://对象被持续按下
+
+
+			break;
+		case LV_EVENT_PRESSED://对象已被按下
+
+
+			break;
+		case LV_EVENT_DRAG_END://拖动结束后
+
+			// if (lv_obj_get_x(lvgl_desktop_main_cont) != 0)
+			// {
+			// 	if (lv_obj_get_x(lvgl_desktop_main_cont) > 100)
+			// 	{
+
+			// 	}
+			// 	else
+			// 	{
+			// 		lv_obj_set_x(lvgl_desktop_main_cont, 0);
+			// 	}
+			// }
+			// if (lv_obj_get_y(lvgl_desktop_main_cont) > 0)
+			// {
+			// 	lv_obj_set_y(lvgl_desktop_main_cont, 0);
+			// }else if (lv_obj_get_y(lvgl_desktop_main_cont) < -(lv_obj_get_height(lvgl_desktop_main_cont)-240))
+			// {
+			// 	lv_obj_set_y(lvgl_desktop_main_cont, -(lv_obj_get_height(lvgl_desktop_main_cont) - 240));
+			// }
+
+			break;
+			break;
+
+		case LV_EVENT_RELEASED://按钮释放
+
+		case LV_EVENT_LONG_PRESSED://按钮长按
+
+			break;
+
+		default:
+			break;
+
+		}
+
+	}
+}
+
 lv_style_t lvgl_bpm_Backgroud_style;
 
 void lvgl_bpm_create(lv_obj_t * Fu)
@@ -65,8 +124,19 @@ void lvgl_bpm_create(lv_obj_t * Fu)
 
 		//lv_obj_set_drag_parent(lvgl_bpm_main_cont, true); //启用 / 禁用父对象可拖动
 		lv_obj_add_style(lvgl_bpm_main_cont, LV_OBJ_PART_MAIN, &lvgl_bpm_style);//设置样式
-		// lv_obj_set_event_cb(lvgl_bpm_main_cont, lvgl_desktop_event_cb);//设置回调函数
+		lv_obj_set_event_cb(lvgl_bpm_main_cont, lvgl_bpm_event_cb);//设置回调函数
 
+#if 1
+     for( int i = 0; i< bpm_lable_num; i++)
+	 {
+		lvgl_bpm_Label[i]=lv_label_create(lv_scr_act(),NULL);
+		lv_label_set_long_mode(lvgl_bpm_Label[i], LV_LABEL_LONG_BREAK); 
+		lv_label_set_recolor(lvgl_bpm_Label[i], true);
+		lv_label_set_text(lvgl_bpm_Label[i], "test");
+		lv_obj_set_width(lvgl_bpm_Label[i], 150);
+	 }
+
+#endif
 #if 0
 		for (int i = 0; i < desktop_Button_Num; i++)
 		{

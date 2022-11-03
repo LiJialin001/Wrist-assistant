@@ -11,6 +11,7 @@
 #endif
 
 #define bpm_event_anXia 100
+#define bpm_lable_num 2
 
 typedef struct
 {
@@ -38,6 +39,7 @@ extern _lvgl_bpm_Func_Data lvgl_bpm_Func_Data;
 
 void lvgl_bpm_create(lv_obj_t * Fu);
 void lvgl_bpm_close(void);
+void lvgl_bpm_event_cb(struct _lv_obj_t * obj, lv_event_t event);
 void lvgl_bpm_hidden(void);
 void lvgl_bpm_TaskCb(lv_task_t *t);
 

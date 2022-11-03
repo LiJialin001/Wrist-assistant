@@ -55,13 +55,19 @@ static void init_task_handler(void *pvParameters)
 		vTaskDelay(pdMS_TO_TICKS(100));
 	}
 #endif
+    bsp_power_init();
+    bsp_ledc_init();
 
     i2c2_init();
 	cst816t_init();
     lcd_init(SPI3_HOST, 80000000);
-    lv_init();
+    lvgl_init();
+	lv_port_fs_init();
     lvgl_Style_create();
     lvgl_bpm_create(lv_scr_act());
+
+    bsp_ledc_set_duty(5);
+
 
     //Init I2C_NUM_0
     i2c_bpm_init();
@@ -91,14 +97,14 @@ static void init_task_handler(void *pvParameters)
 	while(1)
 	{
         //Update sensor, saving to "result"
-        if(max30102_update(&max30102, &result)==ESP_OK) {
-            if(result.pulse_detected) {
-                printf("BEAT\n");
-                printf("BPM: %f | SpO2: %f%%\n", result.heart_bpm, result.spO2);
-            }
-        } else {
-            main_debug("MAX30102 not found\r\n");
-        }
+        // if(max30102_update(&max30102, &result)==ESP_OK) {
+        //     if(result.pulse_detected) {
+        //         printf("BEAT\n");
+        //         printf("BPM: %f | SpO2: %f%%\n", result.heart_bpm, result.spO2);
+        //     }
+        // } else {
+        //     main_debug("MAX30102 not found\r\n");
+        // }
 		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
 
