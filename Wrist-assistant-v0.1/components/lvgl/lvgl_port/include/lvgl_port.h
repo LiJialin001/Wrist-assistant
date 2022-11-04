@@ -30,6 +30,7 @@
 
 #include "cst816t.h"
 #include "lcd.h"
+#include "my_system.h"
 
 
 #ifdef __cplusplus

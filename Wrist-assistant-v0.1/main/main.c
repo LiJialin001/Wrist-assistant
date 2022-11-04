@@ -11,9 +11,12 @@ static void init_task_handler(void *pvParameters)
 	// main_debug("esp32 sdk version :%s\r\n", esp_get_idf_version());
 
 	// bsp_key_init();
-
     // bsp_power_init();
+
+    system_data.spiffs_sta = my_spiffs_init();
+	system_data.nvs_sta = nvs_init();
     bsp_ledc_init();
+
 
     // mpu6050
     i2c_mpu6050_init();
@@ -30,31 +33,33 @@ static void init_task_handler(void *pvParameters)
 
     bsp_ledc_set_duty(5);
 
+    wifi_init();
+
 
     //Init I2C_NUM_0
-    i2c_bpm_init();
+    // i2c_bpm_init();
     //Init sensor at I2C_NUM_0
-    if (max30102_init( &max30102, I2C_PORT_NUM_BPM,
-                   MAX30102_DEFAULT_OPERATING_MODE,
-                   MAX30102_DEFAULT_SAMPLING_RATE,
-                   MAX30102_DEFAULT_LED_PULSE_WIDTH,
-                   MAX30102_DEFAULT_IR_LED_CURRENT,
-                   MAX30102_DEFAULT_START_RED_LED_CURRENT,
-                   MAX30102_DEFAULT_MEAN_FILTER_SIZE,
-                   MAX30102_DEFAULT_PULSE_BPM_SAMPLE_SIZE,
-                   MAX30102_DEFAULT_ADC_RANGE, 
-                   MAX30102_DEFAULT_SAMPLE_AVERAGING,
-                   MAX30102_DEFAULT_ROLL_OVER,
-                   MAX30102_DEFAULT_ALMOST_FULL,
-                   false )==ESP_OK) {
-                        main_debug("MAX30102 Init OK\r\n");
-                   } else {
-                        main_debug("MAX30102 not found\r\n");
-                   }
-	main_debug("初始化结束\r\n");
+    // if (max30102_init( &max30102, I2C_PORT_NUM_BPM,
+    //                MAX30102_DEFAULT_OPERATING_MODE,
+    //                MAX30102_DEFAULT_SAMPLING_RATE,
+    //                MAX30102_DEFAULT_LED_PULSE_WIDTH,
+    //                MAX30102_DEFAULT_IR_LED_CURRENT,
+    //                MAX30102_DEFAULT_START_RED_LED_CURRENT,
+    //                MAX30102_DEFAULT_MEAN_FILTER_SIZE,
+    //                MAX30102_DEFAULT_PULSE_BPM_SAMPLE_SIZE,
+    //                MAX30102_DEFAULT_ADC_RANGE, 
+    //                MAX30102_DEFAULT_SAMPLE_AVERAGING,
+    //                MAX30102_DEFAULT_ROLL_OVER,
+    //                MAX30102_DEFAULT_ALMOST_FULL,
+    //                false )==ESP_OK) {
+    //                     main_debug("MAX30102 Init OK\r\n");
+    //                } else {
+    //                     main_debug("MAX30102 not found\r\n");
+    //                }
+	// main_debug("初始化结束\r\n");
 
-    printf("MAX30102 Test\n");
-    max30102_data_t result = {};
+    // printf("MAX30102 Test\n");
+    // max30102_data_t result = {};
 
     measurement_out_t measurement_out;
 

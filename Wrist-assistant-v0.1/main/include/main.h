@@ -34,16 +34,16 @@
 #include "my_system.h"
 #include "system_config_data.h"
 #include "mynvs.h"
+#include "my_spiffs.h"
 
 #include "bsp_i2c.h"
 #include "bsp_ledc.h"
 #include "bsp_power.h"
 #include "bsp_key.h"
 
+// 网络
 #include "wifi.h"
-
 #include "webserver.h"
-
 #include "https_shijian.h"
 #include "https_tianqi.h"
 #include "https_riluo.h"
@@ -53,6 +53,9 @@
 #include "https.h"
 #include "user_http_s.h"
 
+// 按钮
+#include "multi_button_task.h"
+#include "multi_button_callback.h"
 
 // 显示屏
 #include "cst816t.h"

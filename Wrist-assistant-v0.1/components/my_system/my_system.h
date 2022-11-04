@@ -29,11 +29,10 @@
 
 typedef struct
 {
-    int sht20_sta;
-    int ft5206_sta;
     int spiffs_sta;
     int nvs_sta;
     int mpu6050_sta;
+    int max30102_sta;
 
 	int Language;
 
@@ -81,7 +80,6 @@ typedef struct
     _kongqi_Data    kongqi_Data;
     _RiLuo_Data     RiLuo_Data[3];
     _RiQi_Data      RiQi_Data;
-
 
 }_system_data;
 

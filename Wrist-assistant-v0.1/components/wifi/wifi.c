@@ -96,11 +96,9 @@ static void https_request_by_get_task(void *pvParameters)
 
         //}
           WIFI_debug("同步时间: %02d:%02d:%02d\r\n",clock_Data.Shi,clock_Data.Fen,clock_Data.Miao);
-
       }else
       {
-
-
+        WIFI_debug("获取时间失败\r\n");
       }
       system_data.HuoQu_ShiJian_Flag = false;
     }
