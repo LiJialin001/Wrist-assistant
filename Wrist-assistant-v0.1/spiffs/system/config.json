@@ -1,0 +1,14 @@
+{
+    "wifi":[
+        {
+            "name":"ANMU",
+            "password":"123456789",
+            "auto connect":"true"
+        }
+    ],
+    "system set":[
+        {
+            "wifi switch":"on"
+        }
+    ]
+}

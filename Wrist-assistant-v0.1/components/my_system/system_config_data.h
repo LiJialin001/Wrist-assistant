@@ -20,8 +20,6 @@ typedef struct _system_wifi_data1
     char auto_connect[10];
     struct _system_wifi_data1 *next;
 
-
-
 }_system_wifi_data;
 
 extern _system_wifi_data *system_wifi_data;

@@ -9,7 +9,7 @@ int https_get_TianQi(void)
   int res = 0;
   char buf[100];
 
-  uint8_t method = GET_REQ;
+  // uint8_t method = GET_REQ;
 
   if(system_data.IP_ADDR[0]==0)
   {

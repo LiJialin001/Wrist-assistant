@@ -64,11 +64,13 @@ int system_init(void)
 	system_set_wifi_kaiguan(true);
 
 	system_wifi_data = wifi_list_create("NULL","NULL","NULL");
-	if(system_wifi_data)
-	{
-		system_debug("wifi链表创建成功");
-	}
-	system_get_wifi_data();
+	// if(system_wifi_data)
+	// {
+	// 	system_debug("wifi链表创建成功");
+	// } else {
+	// 	system_debug("wifi链表创建失败");
+	// }
+	// system_get_wifi_data();
     return 0;
 }
 

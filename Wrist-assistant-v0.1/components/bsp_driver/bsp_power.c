@@ -23,10 +23,13 @@ void bsp_power_send_off(void)
 }
 
 
-static portMUX_TYPE lock = portMUX_INITIALIZER_UNLOCKED;
+// static portMUX_TYPE lock = portMUX_INITIALIZER_UNLOCKED;
+
+
 // #define ENTER_CRITICAL()   portENTER_CRITICAL(&cdc_acm_lock)
 // #define EXIT_CRITICAL()    portEXIT_CRITICAL(&cdc_acm_lock)
-static uint8_t power_flag=0;
+
+// static uint8_t power_flag=0;
 
 // void bsp_power_handler(void* params)
 // {
@@ -103,7 +106,7 @@ static uint8_t power_flag=0;
 
 //   vTaskDelete(NULL);
 // }
-#define sleep_time (1000*1000*3600*24)*30//30天
+#define sleep_time (1000LL*1000*3600*24)*30//30天
 void bsp_power_sleep(void)
 {
 	esp_sleep_enable_ext1_wakeup((1ULL << KEY_POWER_PIN),ESP_EXT1_WAKEUP_ANY_HIGH);

@@ -5,8 +5,6 @@
 #include "string.h"
 #include "main.h"
 #include "math.h"
-
-
 #include "font.h"
 
 #include "lvgl.h"

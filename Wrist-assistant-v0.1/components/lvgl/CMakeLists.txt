@@ -25,7 +25,7 @@ idf_component_register(SRC_DIRS "."
                                 "lvgl_port/include"
                                 "lv_gif"
                                 "lv_lib_png"
-                        REQUIRES touch_screen main)
+                        REQUIRES touch_screen my_system main)
 
 # Some warning might appear when complile master branch.
 # Disable all warning output and set optimize level

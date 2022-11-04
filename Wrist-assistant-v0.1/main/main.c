@@ -16,6 +16,7 @@ static void init_task_handler(void *pvParameters)
     system_data.spiffs_sta = my_spiffs_init();
 	system_data.nvs_sta = nvs_init();
     bsp_ledc_init();
+    system_init();
 
 
     // mpu6050
@@ -29,7 +30,7 @@ static void init_task_handler(void *pvParameters)
     lvgl_init();
 	lv_port_fs_init();
     lvgl_Style_create();
-    lvgl_bpm_create(lv_scr_act());
+    lvgl_clock_create(lv_scr_act());
 
     bsp_ledc_set_duty(5);
 

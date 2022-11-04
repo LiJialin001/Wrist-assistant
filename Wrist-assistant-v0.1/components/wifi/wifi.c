@@ -11,7 +11,7 @@ _wifi_data wifi_data;
 void wifi_lianjie_chenggong(void *event);
 void wifi_lianjie_shibai(void);
 
-const char*wifi_TEXT[][SYSTEM_LANGUAGE_NUM] =
+char*wifi_TEXT[][SYSTEM_LANGUAGE_NUM] =
 {
 	{ "WIFI未连接", "WIFI未連接", "WiFi Not Connected", NULL},
 	{ "WIFI已连接", "WIFI已連接", "WiFi Connected", NULL},
@@ -29,7 +29,7 @@ static portMUX_TYPE cdc_acm_lock = portMUX_INITIALIZER_UNLOCKED;
 
 static void https_request_by_get_task(void *pvParameters)
 {
-  int i=0;
+  // int i=0;
   int res;
   int count=0;
 

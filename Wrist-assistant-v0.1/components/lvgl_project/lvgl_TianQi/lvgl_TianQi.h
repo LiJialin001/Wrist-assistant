@@ -1,6 +1,7 @@
 #ifndef __LVGL_TianQi_H__
 #define __LVGL_TianQi_H__
 
+#include "lvgl.h"
 #include "lvgl_Project.h"
 
 #define lvgl_TianQi_ShuaXin_GaoDu 61
