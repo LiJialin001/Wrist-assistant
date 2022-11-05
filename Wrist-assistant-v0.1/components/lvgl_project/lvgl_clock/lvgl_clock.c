@@ -370,7 +370,7 @@ void lvgl_clock_close(int dire)
 	}
 	else if (dire == 1)
 	{
-		lvgl_bpm_create(lv_scr_act());
+		lvgl_bilibili_create(lv_scr_act());
 	}else {
 		lvgl_SheZhi_create(lv_scr_act());
 	}

@@ -23,7 +23,16 @@
 
 #define WIFI_SCAN_LIST_SIZE 40
 
+typedef struct
+{
+  char id[20];
+	char heart_rate[20];         
+	char blood_oxygen[20];        
+  char steps[20];       
+  char wenzhang[20];       //文章播放量
 
+
+}_bpm_Data;
 
 
 
@@ -49,6 +58,7 @@ typedef struct
     int Temp;
     int Humi;
     int HuoQu_TianQi_Flag;
+    int HuoQu_bilibili_Flag;
     int HuoQu_ShiJian_Flag;
     int WIFI_Sta;//WIFI连接状态
     bool set_connect_wifi_flag;
@@ -80,6 +90,7 @@ typedef struct
     _kongqi_Data    kongqi_Data;
     _RiLuo_Data     RiLuo_Data[3];
     _RiQi_Data      RiQi_Data;
+    _bpm_Data       bpm_Data;
 
 }_system_data;
 
