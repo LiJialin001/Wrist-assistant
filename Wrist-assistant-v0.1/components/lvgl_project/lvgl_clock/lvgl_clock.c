@@ -268,8 +268,8 @@ void lvgl_clock_create(lv_obj_t * Fu)
 		lv_style_copy(&lvgl_clock_main_cont_style, &lvgl_WuBianKuang_cont_style);
 		/*渐变色*/
 		lv_style_set_bg_opa(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, LV_OPA_COVER);//背景透明度
-		lv_style_set_bg_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, lv_color_hex(0xFF1493));//背景上面颜色
-		lv_style_set_bg_grad_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, lv_color_hex(0xFF1493));//背景上面颜色
+		lv_style_set_bg_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, lv_color_hex(0xBA55D3));//背景上面颜色
+		lv_style_set_bg_grad_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, lv_color_hex(0xBA55D3));//背景上面颜色
 		// lv_style_set_bg_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, LV_COLOR_BLACK);//背景上面颜色
 		// lv_style_set_bg_grad_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, LV_COLOR_BLACK);//背景上面颜色
 		lv_style_set_bg_grad_dir(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, LV_GRAD_DIR_VER);//渐变方向

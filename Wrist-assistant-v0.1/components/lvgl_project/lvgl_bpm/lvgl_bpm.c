@@ -45,26 +45,28 @@ void lvgl_bpm_event_cb(struct _lv_obj_t * obj, lv_event_t event)
 			break;
 		case LV_EVENT_DRAG_END://拖动结束后
 
-			// if (lv_obj_get_x(lvgl_desktop_main_cont) != 0)
-			// {
-			// 	if (lv_obj_get_x(lvgl_desktop_main_cont) > 100)
-			// 	{
+			if (lv_obj_get_y(lvgl_bpm_main_cont) !=0)
+			{
+				lv_obj_set_y(lvgl_bpm_main_cont, 0);
+				
+			}
 
-			// 	}
-			// 	else
-			// 	{
-			// 		lv_obj_set_x(lvgl_desktop_main_cont, 0);
-			// 	}
-			// }
-			// if (lv_obj_get_y(lvgl_desktop_main_cont) > 0)
-			// {
-			// 	lv_obj_set_y(lvgl_desktop_main_cont, 0);
-			// }else if (lv_obj_get_y(lvgl_desktop_main_cont) < -(lv_obj_get_height(lvgl_desktop_main_cont)-240))
-			// {
-			// 	lv_obj_set_y(lvgl_desktop_main_cont, -(lv_obj_get_height(lvgl_desktop_main_cont) - 240));
-			// }
-
-			break;
+			if (lv_obj_get_x(lvgl_bpm_main_cont) != 0)
+			{
+				if (lv_obj_get_x(lvgl_bpm_main_cont) < -100)
+				{
+					lvgl_bpm_close();
+				}
+				else
+				if (lv_obj_get_x(lvgl_bpm_main_cont) > 100)
+				{
+					lvgl_bpm_close();
+				}
+				else
+				{
+					lv_obj_set_x(lvgl_bpm_main_cont, 0);
+				}
+			}
 			break;
 
 		case LV_EVENT_RELEASED://按钮释放
@@ -224,7 +226,7 @@ void lvgl_bpm_close(void)
 	lvgl_bpm_Func_Data.point.y = lv_obj_get_y(lvgl_bpm_main_cont);
 	lvgl_bpm_Func_Data.point.x = lv_obj_get_x(lvgl_bpm_main_cont);
 
-	// lvgl_clock_create(lv_scr_act());
+	lvgl_clock_create(lv_scr_act());
 }
 
 void lvgl_bpm_TaskCb(lv_task_t *t)

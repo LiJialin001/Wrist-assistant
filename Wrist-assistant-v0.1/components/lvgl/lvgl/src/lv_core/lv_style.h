@@ -66,7 +66,7 @@ enum {
     LV_GRAD_DIR_NONE,
     LV_GRAD_DIR_VER,
     LV_GRAD_DIR_HOR,
-    _LV_GRAD_DIR_LAST
+    _LV_GRAD_DIR_LAST 
 };
 
 typedef uint8_t lv_grad_dir_t;
