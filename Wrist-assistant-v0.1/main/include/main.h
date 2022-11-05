@@ -6,7 +6,8 @@
 #include <math.h>
 #include <os.h>
 #include "nvs_flash.h"
-#include "esp_spi_flash.h"
+#include "esp_heap_caps.h"
+// #include "esp_spi_flash.h"
 #include "esp_wifi.h"
 #include "esp_event_loop.h"
 #include "esp_log.h"

@@ -58,19 +58,19 @@ int system_init(void)
     esp_timer_start_periodic(g_wifi_connect_timer, 100 * 1000U);
 //----时间更新定时器----//
 
-	system_data.RiQi_Data.nian=2021;
-	system_data.RiQi_Data.yue=1;
-	system_data.RiQi_Data.ri=14;
+	system_data.RiQi_Data.nian=2022;
+	system_data.RiQi_Data.yue=11;
+	system_data.RiQi_Data.ri=6;
 	system_set_wifi_kaiguan(true);
 
 	system_wifi_data = wifi_list_create("NULL","NULL","NULL");
-	// if(system_wifi_data)
-	// {
-	// 	system_debug("wifi链表创建成功");
-	// } else {
-	// 	system_debug("wifi链表创建失败");
-	// }
-	// system_get_wifi_data();
+	if(system_wifi_data)
+	{
+		system_debug("wifi链表创建成功");
+	} else {
+		system_debug("wifi链表创建失败");
+	}
+	system_get_wifi_data();
     return 0;
 }
 

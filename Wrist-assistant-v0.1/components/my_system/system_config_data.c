@@ -1,5 +1,5 @@
 #include "system_config_data.h"
-#include "string.h"
+#include "esp_heap_caps.h"
 
 _system_wifi_data *system_wifi_data;
 
@@ -8,11 +8,16 @@ _system_wifi_data* wifi_list_create(char * name,char *password,char *auto_connec
 	size_t data_size = sizeof(_system_wifi_data);
 	_system_wifi_data* NewNode = (_system_wifi_data*)heap_caps_malloc(data_size, MALLOC_CAP_SPIRAM);
 
+	if (NewNode == NULL)
+	{
+		system_config_data_debug("wifi_list_create NewNode == NULL");
+		return NULL;
+	}
 
-	// memset(NewNode,0x00,data_size);
-	// memcpy(NewNode->name,name,strlen(name));
-	// memcpy(NewNode->password,password,strlen(password));
-	// memcpy(NewNode->auto_connect,auto_connect,strlen(auto_connect));
+	memset(NewNode,0x00,data_size);
+	memcpy(NewNode->name,name,strlen(name));
+	memcpy(NewNode->password,password,strlen(password));
+	memcpy(NewNode->auto_connect,auto_connect,strlen(auto_connect));
 
 	return NewNode;
 }
@@ -125,42 +130,48 @@ uint8_t system_get_wifi_data(void)
 	const char *config_fime_path = "/spiffs/system/config.json";
 	uint32_t file_size=0;
 
-	// file_size = system_get_file_size(config_fime_path);
-    // FILE* file = fopen(config_fime_path, "r");
-    // if (file == NULL)
-	// {
-    //     system_debug("打开配置文件失败");
-    //     return;
-    // }
-	// system_debug("打开配置文件成功");
+	file_size = system_get_file_size(config_fime_path);
+    FILE* file = fopen("/spiffs/config.json", "r");
+    if (file == NULL)
+	{
+        system_debug("打开配置文件失败");
+        return 1;
+    }
+	system_debug("打开配置文件成功");
 
-    // char *buf = (char*)heap_caps_malloc(file_size, MALLOC_CAP_SPIRAM);
-	// memset(buf,0x00,file_size);
-    // fread(buf, 1, file_size, file);
+    char *buf = (char*)heap_caps_malloc(file_size, MALLOC_CAP_SPIRAM);
 
-    // fclose(file);
-	// system_debug("读出文件:%s\r\n",buf);
+	if (buf == NULL){
+		system_debug("buf == NULL");
+		return 1;
+	}
 
-	// cJSON *json_A = cJSON_Parse(buf);
-	// cJSON *j_wifi = cJSON_GetObjectItem(json_A,"wifi");
+	memset(buf,0x00,file_size);
+    fread(buf, 1, file_size, file);
 
-	// if( NULL != j_wifi )
-	// {
-	// 	cJSON *j_wifi_item  = j_wifi->child;
-	// 	//while( j_wifi_item != NULL )//暂时只读取第一个wifi数据
-	// 	{
-	// 		char * name   = cJSON_GetObjectItem( j_wifi_item , "name")->valuestring ;
-	// 		char * password =  cJSON_GetObjectItem( j_wifi_item , "password")->valuestring ;
-	// 		char * aotuconnect =  cJSON_GetObjectItem( j_wifi_item , "auto connect")->valuestring ;
-	// 		system_debug("name:%s password:%s aotuconnect:%s\n",name,password,aotuconnect);
-	// 		//wifi_list_add_node_back(&system_wifi_data,name,password,aotuconnect);
+    fclose(file);
+	system_debug("读出文件:%s\r\n",buf);
 
-	// 		sprintf(system_data.wifi_name,name);
-	// 		sprintf(system_data.wifi_password,password);
+	cJSON *json_A = cJSON_Parse(buf);
+	cJSON *j_wifi = cJSON_GetObjectItem(json_A,"wifi");
 
-	// 		j_wifi_item = j_wifi_item->next;
-	// 	}
-	// }
+	if( NULL != j_wifi )
+	{
+		cJSON *j_wifi_item  = j_wifi->child;
+		//while( j_wifi_item != NULL )//暂时只读取第一个wifi数据
+		{
+			char * name   = cJSON_GetObjectItem( j_wifi_item , "name")->valuestring ;
+			char * password =  cJSON_GetObjectItem( j_wifi_item , "password")->valuestring ;
+			char * aotuconnect =  cJSON_GetObjectItem( j_wifi_item , "auto connect")->valuestring ;
+			system_debug("name:%s password:%s aotuconnect:%s\n",name,password,aotuconnect);
+			//wifi_list_add_node_back(&system_wifi_data,name,password,aotuconnect);
+
+			sprintf(system_data.wifi_name,name);
+			sprintf(system_data.wifi_password,password);
+
+			j_wifi_item = j_wifi_item->next;
+		}
+	}
 // ******************************************************
 	// cJSON * idle_policy_arry = c_json_parse_object(gps_upload_policy_cJSON, "idlePolicy");
 
@@ -175,8 +186,8 @@ uint8_t system_get_wifi_data(void)
 
 //*************************************************************
 
-	// cJSON_Delete(json_A);
-	// heap_caps_free(buf);
+	cJSON_Delete(json_A);
+	heap_caps_free(buf);
 	return 0;
 }
 

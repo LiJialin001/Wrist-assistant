@@ -10,16 +10,10 @@
 #define font_debug(format, ...) ;
 #endif
 
-#if 0
 #define font_12_path "/spiffs/font_ChangYongHanZi_12.bin"
 #define font_16_path "/spiffs/font_ChangYongHanZi_16.bin"
 #define font_24_path "/spiffs/font_ChangYongHanZi_24.bin"
-#else
-#define font_12_path "/sdcard/system/font/font_ChangYongHanZi_12.bin"
-#define font_16_path "/sdcard/system/font/font_ChangYongHanZi_16.bin"
-#define font_24_path "/sdcard/system/font/font_ChangYongHanZi_24.bin"
 
-#endif
 
 typedef struct
 {

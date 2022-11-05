@@ -137,11 +137,8 @@ static lv_fs_res_t fs_open (lv_fs_drv_t * drv, void * file_p, const char * path,
 	else if(mode == LV_FS_MODE_RD) flags = "rb";
 	else if(mode == (LV_FS_MODE_WR | LV_FS_MODE_RD)) flags = "rb+";
 
-#if sd_file
-    sprintf(f_path, "/sdcard" "/%s", path);
-#else
+
     sprintf(f_path, "/spiffs" "/%s", path);
-#endif
     // ESP_LOGW(TAG, "Open file : [%s] with mode [%d]", f_path, mode);
 
     file_t f = fopen(f_path, flags);

@@ -1,8 +1,8 @@
 {
     "wifi":[
         {
-            "name":"ANMU",
-            "password":"123456789",
+            "name":"wifitest",
+            "password":"11111111",
             "auto connect":"true"
         }
     ],
