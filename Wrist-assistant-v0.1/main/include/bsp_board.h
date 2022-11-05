@@ -27,9 +27,6 @@
 #define I2C_FRQ 100000
 
 
-#define GPIO_LED_R      (GPIO_NUM_5)
-#define GPIO_LED_G      (GPIO_NUM_6)
-
 // MPU6050
 #define MPU6050_I2C_PORT_NUM (1)
 #define MPU6050_I2C_SDA    (GPIO_NUM_12)
