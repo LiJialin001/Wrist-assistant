@@ -58,7 +58,7 @@ typedef struct
     int Temp;
     int Humi;
     int HuoQu_TianQi_Flag;
-    int HuoQu_bilibili_Flag;
+    int HuoQu_heart_Flag;
     int HuoQu_ShiJian_Flag;
     int WIFI_Sta;//WIFI连接状态
     bool set_connect_wifi_flag;

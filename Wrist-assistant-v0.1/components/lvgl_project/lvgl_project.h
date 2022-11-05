@@ -17,15 +17,14 @@
 #include "bmp_tianqi_80x80.h"
 #include "bmp_ShuaXin.h"
 
-#include "lvgl_bpm.h"
 #include "lvgl_hint.h"
 #include "lvgl_style.h"
 #include "lvgl_global.h"
 #include "lvgl_clock.h"
 #include "lvgl_ShuaXin.h"
 #include "lvgl_TianQi.h"
-#include "lvgl_bilibili_anim.h"
-#include "lvgl_bilibili.h"
+#include "lvgl_heart_anim.h"
+#include "lvgl_heart.h"
 
 #include "lvgl_SheZhi.h"
 #include "lvgl_SheZhi_yuyan_anim.h"

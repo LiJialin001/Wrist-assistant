@@ -3,7 +3,6 @@ idf_component_register(
     SRC_DIRS
     "."
     "font"
-    "lvgl_bpm"
     "lvgl_Some_style"
     "lvgl_global"
     "lvgl_clock"
@@ -15,7 +14,7 @@ idf_component_register(
     "lvgl_SheZhi/lvgl_SheZhi_yuyan"
     "lvgl_shurufa"
     "lvgl_chulizhong"
-    "lvgl_bilibili"
+    "lvgl_heart"
     "image"
     "image/bmp_ShuaXin"
     "image/bmp_tianqi_40x40"
@@ -26,7 +25,6 @@ idf_component_register(
     INCLUDE_DIRS
     "."
     "font"
-    "lvgl_bpm"
     "lvgl_Some_style"
     "lvgl_global"
     "lvgl_clock"
@@ -38,7 +36,7 @@ idf_component_register(
     "lvgl_SheZhi/lvgl_SheZhi_yuyan"
     "lvgl_shurufa"
     "lvgl_chulizhong"
-    "lvgl_bilibili"
+    "lvgl_heart"
     "image"
     "image/bmp_ShuaXin"
     "image/bmp_tianqi_40x40"

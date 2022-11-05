@@ -1,20 +1,20 @@
-#ifndef __lvgl_bilibili_H__
-#define __lvgl_bilibili_H__
+#ifndef __lvgl_heart_H__
+#define __lvgl_heart_H__
 
 #include "lvgl.h"
 #include "lvgl_Project.h"
 #include "my_system.h"
 
 #if 1
-#define bilibili_debug(format, ...) lvgl_project_debug("[哔哩哔哩]- ",format,##__VA_ARGS__);
+#define heart_debug(format, ...) lvgl_project_debug("[heart_page]- ",format,##__VA_ARGS__);
 #else
-#define bilibili_debug(format, ...) ;
+#define heart_debug(format, ...) ;
 #endif
 
-#define bilibili_Button_Num 3
-#define bilibili_event_anXia 100
+#define heart_Button_Num 3
+#define heart_event_anXia 100
 
-#define  bilibili_zuo_you_bmp_y 135
+#define  heart_zuo_you_bmp_y 135
 
 
 
@@ -64,9 +64,9 @@ typedef struct
 
 
 
-}_bilibili_ChuangKou;
+} _heart_ChuangKou;
 
-extern _bilibili_ChuangKou bilibili_ChuangKou;
+extern  _heart_ChuangKou heart_ChuangKou;
 typedef struct
 {
 	char buf[20];
@@ -80,24 +80,24 @@ typedef struct
 	lv_point_t point;
 
 
-}_lvgl_bilibili_GongNeng_Data;
+}_lvgl_heart_GongNeng_Data;
 
-extern _lvgl_bilibili_GongNeng_Data lvgl_bilibili_GongNeng_Data;
-
-
-extern lv_obj_t *lvgl_bilibili_main_cont;
-
-void lvgl_bilibili_create(lv_obj_t * Fu);
-void lvgl_bilibili_close(int);
-void lvgl_bilibili_closed(void);
-void lvgl_bilibili_TaskCb(lv_task_t *t);
-void lvgl_bilibili_shuaxin_kaishi(void);
-void lvgl_bilibili_shuaxin_jieshu(void);
+extern _lvgl_heart_GongNeng_Data lvgl_heart_GongNeng_Data;
 
 
-void lvgl_bilibili_Set_heart_rate(char *str);
-void lvgl_bilibili_Set_blood_oxygen(char *str);
-void lvgl_bilibili_Set_steps(char *str);
+extern lv_obj_t *lvgl_heart_main_cont;
+
+void lvgl_heart_create(lv_obj_t * Fu);
+void lvgl_heart_close(int);
+void lvgl_heart_closed(void);
+void lvgl_heart_TaskCb(lv_task_t *t);
+void lvgl_heart_shuaxin_kaishi(void);
+void lvgl_heart_shuaxin_jieshu(void);
+
+
+void lvgl_heart_Set_heart_rate(char *str);
+void lvgl_heart_Set_blood_oxygen(char *str);
+void lvgl_heart_Set_steps(char *str);
 
 
 
