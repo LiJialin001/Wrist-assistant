@@ -22,8 +22,8 @@
 #define GPIO_TP_I2C_SDA     (GPIO_NUM_47)
 
 #define I2C_PORT_NUM_BPM     (1)
-#define GPIO_BPM_I2C_SCL     (GPIO_NUM_12)
-#define GPIO_BPM_I2C_SDA     (GPIO_NUM_13)
+#define GPIO_BPM_I2C_SCL     (GPIO_NUM_5)
+#define GPIO_BPM_I2C_SDA     (GPIO_NUM_4)
 #define I2C_FRQ 100000
 
 
@@ -32,8 +32,8 @@
 
 // MPU6050
 #define MPU6050_I2C_PORT_NUM (1)
-#define MPU6050_I2C_SDA    (GPIO_NUM_19)
-#define MPU6050_I2C_SCL   (GPIO_NUM_18)
+#define MPU6050_I2C_SDA    (GPIO_NUM_12)
+#define MPU6050_I2C_SCL   (GPIO_NUM_21)
 #define MPU6050_I2C_FREQ 400000
 #define MPU6050_ADDR 0x68  //器件地址： b110100(AD0) 
 
