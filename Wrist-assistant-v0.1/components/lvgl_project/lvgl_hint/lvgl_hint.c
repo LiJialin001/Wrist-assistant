@@ -79,7 +79,7 @@ void lvgl_hint_create(lv_obj_t * Fu,char *text,uint8_t touming,uint8_t shijian)
 		//----创建容器----//
 		lvgl_tishi_main_cont = lv_cont_create(Fu, NULL);
 		lv_obj_set_pos(lvgl_tishi_main_cont, 0, 240);
-		lv_obj_set_size(lvgl_tishi_main_cont, 80, 24);
+		lv_obj_set_size(lvgl_tishi_main_cont, 140, 30);
 
 		lv_obj_set_click(lvgl_tishi_main_cont, true); //启用 / 禁用可点击
 		lv_obj_set_drag(lvgl_tishi_main_cont, true);//启用/禁用对象可拖动

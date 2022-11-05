@@ -60,25 +60,32 @@ void lvgl_clock_event_cb(struct _lv_obj_t * obj, lv_event_t event)
 			{
 				if(lv_obj_get_y(lvgl_clock_main_cont) > lvgl_ShuaXin_GaoDu)
 				{
-
-
-					lvgl_hint_create(lv_scr_act(),lvgl_globa_text[1][system_get_Language()],200,3);
+					lvgl_hint_create(lv_scr_act(),lvgl_globa_text[1][system_get_Language()],100,3);
 					system_data.HuoQu_ShiJian_Flag=true;
 					xSemaphoreGive(system_data.https_request_Semaphore);//释放信号量
+					lv_obj_set_y(lvgl_clock_main_cont, 0);
 				}
-				lv_obj_set_y(lvgl_clock_main_cont, 0);
+				// else 
+				// if (lv_obj_get_y(lvgl_clock_main_cont) < -100)
+				// {
+				// 	lvgl_clock_close(2);
+				// }
+				else {
+					lv_obj_set_y(lvgl_clock_main_cont, 0);
+				}
+				
 			}
 
 			if (lv_obj_get_x(lvgl_clock_main_cont) != 0)
 			{
 				if (lv_obj_get_x(lvgl_clock_main_cont) < -100)
 				{
-					lvgl_clock_close();
+					lvgl_clock_close(0);
 				}
 				else
 				if (lv_obj_get_x(lvgl_clock_main_cont) > 100)
 				{
-					lvgl_clock_close();
+					lvgl_clock_close(1);
 				}
 				else
 				{
@@ -261,10 +268,10 @@ void lvgl_clock_create(lv_obj_t * Fu)
 		lv_style_copy(&lvgl_clock_main_cont_style, &lvgl_WuBianKuang_cont_style);
 		/*渐变色*/
 		lv_style_set_bg_opa(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, LV_OPA_COVER);//背景透明度
-		//lv_style_set_bg_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, lv_color_hex(0x1b1d5c));//背景上面颜色
-		//lv_style_set_bg_grad_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, lv_color_hex(0x5c418d));//背景上面颜色
-		lv_style_set_bg_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, LV_COLOR_BLACK);//背景上面颜色
-		lv_style_set_bg_grad_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, LV_COLOR_BLACK);//背景上面颜色
+		lv_style_set_bg_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, lv_color_hex(0xFF1493));//背景上面颜色
+		lv_style_set_bg_grad_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, lv_color_hex(0xFF1493));//背景上面颜色
+		// lv_style_set_bg_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, LV_COLOR_BLACK);//背景上面颜色
+		// lv_style_set_bg_grad_color(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, LV_COLOR_BLACK);//背景上面颜色
 		lv_style_set_bg_grad_dir(&lvgl_clock_main_cont_style, LV_STATE_DEFAULT, LV_GRAD_DIR_VER);//渐变方向
 
 		/*调整渐变色位置*/
@@ -277,9 +284,9 @@ void lvgl_clock_create(lv_obj_t * Fu)
 		lv_obj_set_size(lvgl_clock_main_cont, lv_obj_get_width(Fu), lv_obj_get_height(Fu));
 
 		//lv_obj_set_click(lvgl_clock_main_cont, false); //启用 / 禁用可点击
-		//lv_obj_set_drag(lvgl_clock_main_cont, false);//启用/禁用对象可拖动
-		//lv_obj_set_drag_dir(lvgl_clock_main_cont, LV_DRAG_DIR_ONE);//设置拖动方向
-		//lv_obj_set_drag_throw(lvgl_clock_main_cont, true);//启用/禁用拖动后是否有惯性移动
+		// lv_obj_set_drag(lvgl_clock_main_cont, true);//启用/禁用对象可拖动
+		// lv_obj_set_drag_dir(lvgl_clock_main_cont, LV_DRAG_DIR_HOR);//设置拖动方向
+		// lv_obj_set_drag_throw(lvgl_clock_main_cont, false);//启用/禁用拖动后是否有惯性移动
 		//lv_obj_set_drag_parent(lvgl_clock_main_cont, false); //启用 / 禁用父对象可拖动
 
 		lv_obj_add_style(lvgl_clock_main_cont, LV_OBJ_PART_MAIN, &lvgl_clock_main_cont_style);//设置样式
@@ -343,26 +350,35 @@ void lvgl_clock_create(lv_obj_t * Fu)
 		clock_debug("显示窗口show\r\n");
 	}
 
-	lv_obj_move_background(lvgl_clock_main_cont);
+	lv_obj_move_background(lvgl_clock_main_cont);  
 
 	lv_obj_set_pos(lvgl_clock_main_cont, 0, 0);
 	lvgl_set_obj_show(lvgl_clock_main_cont);
 
 	clock_anim_DongHua_Jin();
 }
-void lvgl_clock_close(void)
+void lvgl_clock_close(int dire)
 {
 
 	lvgl_task_delete(&lvgl_clock_task);
 	lvgl_clock_task=NULL;
 
 	lv_obj_del(lvgl_clock_main_cont);
+	if (dire == 0)
+	{
+		lvgl_TianQi_create(lv_scr_act());
+	}
+	else if (dire == 1)
+	{
+		lvgl_bpm_create(lv_scr_act());
+	}else {
+		lvgl_SheZhi_create(lv_scr_act());
+	}
+
 	//lvgl_set_obj_hide(lvgl_clock_main_cont);
 	// lvgl_set_obj_hide(line_Shi);
 	// lvgl_set_obj_hide(line_Fen);
 	// lvgl_set_obj_hide(line_Miao);
-
-	lvgl_bpm_create(lv_scr_act());
 }
 void clock_TaskCb(lv_task_t *t)
 {

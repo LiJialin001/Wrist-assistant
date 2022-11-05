@@ -25,6 +25,14 @@
 #include "lvgl_ShuaXin.h"
 #include "lvgl_TianQi.h"
 
+#include "lvgl_SheZhi.h"
+#include "lvgl_SheZhi_yuyan_anim.h"
+#include "lvgl_SheZhi_yuyan.h"
+#include "lvgl_SheZhi_wifi.h"
+
+#include "lvgl_shurufa.h"
+#include "lvgl_chulizhong.h"
+
 
 #define win32 0
 

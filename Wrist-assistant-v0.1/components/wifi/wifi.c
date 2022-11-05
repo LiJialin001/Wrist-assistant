@@ -13,11 +13,11 @@ void wifi_lianjie_shibai(void);
 
 char*wifi_TEXT[][SYSTEM_LANGUAGE_NUM] =
 {
-	{ "WIFI未连接", "WIFI未連接", "WiFi Not Connected", NULL},
-	{ "WIFI已连接", "WIFI已連接", "WiFi Connected", NULL},
-  { "WIFI已断开", "WIFI已斷開", "WiFi Disconnected", NULL},
-  { "WIFI连接失败", "WIFI連接失敗", "WiFi connection failed", NULL},
-  { "WIFI开始连接", "WIFI开始连接", "WiFi start connection", NULL},
+	{ "WiFi Not Connected", "WiFi Not Connected", "WiFi Not Connected", NULL},
+	{ "WiFi Connected", "WiFi Connected", "WiFi Connected", NULL},
+  { "WiFi Disconnected", "WiFi Disconnected", "WiFi Disconnected", NULL},
+  { "WiFi connection failed", "WiFi connection failed", "WiFi connection failed", NULL},
+  { "WiFi start connection", "WiFi start connection", "WiFi start connection", NULL},
 
 };
 
@@ -129,7 +129,7 @@ static void https_request_by_get_task(void *pvParameters)
             lvgl_TianQi_Set_TianQi_JinTian(
             0,
             atoi(system_data.Weather_Data[0].code_day),
-            "今天",
+            "Today",
             atoi(system_data.Weather_Data[0].low),
             atoi(system_data.Weather_Data[0].high)
             );
@@ -137,7 +137,7 @@ static void https_request_by_get_task(void *pvParameters)
             lvgl_TianQi_Set_TianQi_MingTian(
             0,
             atoi(system_data.Weather_Data[1].code_day),
-            "明天",
+            "Tommerow",
             atoi(system_data.Weather_Data[1].low),
             atoi(system_data.Weather_Data[1].high)
             );
@@ -145,7 +145,7 @@ static void https_request_by_get_task(void *pvParameters)
             lvgl_TianQi_Set_TianQi_HouTian(
             0,
             atoi(system_data.Weather_Data[2].code_day),
-            "后天",
+            "after tomorrow",
             atoi(system_data.Weather_Data[2].low),
             atoi(system_data.Weather_Data[2].high)
             );
@@ -164,7 +164,7 @@ static void https_request_by_get_task(void *pvParameters)
       else
 
       {
-        lvgl_TianQi_Set_ChengShi("WIFI未连接");
+        lvgl_TianQi_Set_ChengShi("WiFi Not Connected");
 
       }
       system_data.HuoQu_TianQi_Flag =false;
