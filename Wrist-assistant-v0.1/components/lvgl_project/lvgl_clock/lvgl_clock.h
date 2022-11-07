@@ -12,6 +12,8 @@
 
 typedef struct
 {
+	lv_obj_t *lvgl_Lucy;
+
 	lv_anim_t lv_anim;
 
 	lv_anim_t lv_anim_Shi;

@@ -21,7 +21,6 @@
 typedef struct
 {
 
-
 	lv_anim_t lv_anim_jin;
 
 
@@ -39,28 +38,28 @@ typedef struct
 
 
 
-	lv_obj_t *lvgl_tou_image;
-	lv_obj_t *lvgl_tou_qian_image;
-	lv_obj_t *lvgl_qian_image;
+	lv_obj_t *lvgl_walk_image;
+	lv_obj_t *lvgl_heart_image;
+	lv_obj_t *lvgl_Sao2_image;
 	lv_obj_t *lvgl_zuo_image;
 	lv_obj_t *lvgl_you_image;
 	lv_obj_t *lvgl_logo_image;
 	lv_obj_t *lvgl_yezi_image;
 
-	//粉丝
-	lv_obj_t *lvgl_cont_fensi;
-	lv_obj_t *lvgl_Label_biaoti_fensi;
-	lv_obj_t *lvgl_Label_fensi;
+	//BPM
+	lv_obj_t *lvgl_cont_bpm;
+	lv_obj_t *lvgl_Label_biaoti_bpm;
+	lv_obj_t *lvgl_Label_bpm;
 
-	//播放
-	lv_obj_t *lvgl_cont_bofang;
-	lv_obj_t *lvgl_Label_biaoti_bofang;
+	//血氧
+	lv_obj_t *lvgl_cont_SaO2;
+	lv_obj_t *lvgl_Label_biaoti_SaO2;
 	lv_obj_t *lvgl_Label_bofang;
 
-	//关注
-	lv_obj_t *lvgl_cont_guanzhu;
-	lv_obj_t *lvgl_Label_biaoti_guanzhu;
-	lv_obj_t *lvgl_Label_guanzhu;
+	//步数
+	lv_obj_t *lvgl_cont_step;
+	lv_obj_t *lvgl_Label_biaoti_step;
+	lv_obj_t *lvgl_Label_step;
 
 
 
@@ -91,8 +90,6 @@ void lvgl_heart_create(lv_obj_t * Fu);
 void lvgl_heart_close(int);
 void lvgl_heart_closed(void);
 void lvgl_heart_TaskCb(lv_task_t *t);
-void lvgl_heart_shuaxin_kaishi(void);
-void lvgl_heart_shuaxin_jieshu(void);
 
 
 void lvgl_heart_Set_heart_rate(char *str);

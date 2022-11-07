@@ -79,9 +79,9 @@ static void init_task_handler(void *pvParameters)
         // printf("accel_xout:%d\t;", measurement_out.accel_out.accel_xout);
         // printf("accel_yout:%d\t;", measurement_out.accel_out.accel_yout);
         // printf("accel_zout:%d;\n", measurement_out.accel_out.accel_zout);
-        printf("gyro_xout:%d\t;", measurement_out.gyro_out.gyro_xout);
-        printf("gyro_yout:%d\t;", measurement_out.gyro_out.gyro_yout);
-        printf("gyro_zout:%d;\n", measurement_out.gyro_out.gyro_zout);
+        // printf("gyro_xout:%d\t;", measurement_out.gyro_out.gyro_xout);
+        // printf("gyro_yout:%d\t;", measurement_out.gyro_out.gyro_yout);
+        // printf("gyro_zout:%d;\n", measurement_out.gyro_out.gyro_zout);
 		vTaskDelay(100 / portTICK_PERIOD_MS);
 	}
 
