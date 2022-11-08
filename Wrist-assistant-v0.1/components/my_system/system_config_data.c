@@ -133,7 +133,7 @@ uint8_t system_get_wifi_data(void)
 	uint32_t file_size=0;
 
 	file_size = system_get_file_size(config_fime_path);
-    FILE* file = fopen("/spiffs/config.json", "r");
+    FILE* file = fopen(config_fime_path, "r");
     if (file == NULL)
 	{
         system_debug("打开配置文件失败");

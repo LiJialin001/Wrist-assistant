@@ -1,7 +1,7 @@
 {
     "wifi":[
         {
-            "name":"anmu",
+            "name":"ANMU",
             "password":"123456789",
             "auto connect":"true"
         }
