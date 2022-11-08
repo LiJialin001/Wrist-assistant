@@ -36,6 +36,8 @@ static void init_task_handler(void *pvParameters)
 
     wifi_init();
 
+    printf_memory();
+
 
     //Init I2C_NUM_0
     // i2c_bpm_init();

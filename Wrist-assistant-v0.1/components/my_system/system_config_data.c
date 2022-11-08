@@ -14,6 +14,8 @@ _system_wifi_data* wifi_list_create(char * name,char *password,char *auto_connec
 		return NULL;
 	}
 
+	system_config_data_debug("wifi_list_create NewNode OK");
+
 	memset(NewNode,0x00,data_size);
 	memcpy(NewNode->name,name,strlen(name));
 	memcpy(NewNode->password,password,strlen(password));
@@ -145,6 +147,8 @@ uint8_t system_get_wifi_data(void)
 		system_debug("buf == NULL");
 		return 1;
 	}
+
+	system_debug("buf OK");
 
 	memset(buf,0x00,file_size);
     fread(buf, 1, file_size, file);
