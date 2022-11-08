@@ -4,13 +4,13 @@
 
 
 
-// void lvgl_heart_anim_ready_zuo_image_cb_Jin(lv_anim_t * anim)
-// {
-// 	// lv_anim_del(&heart_ChuangKou.lv_anim_zuo_image_jin, NULL);
+void lvgl_heart_anim_ready_zuo_image_cb_Jin(lv_anim_t * anim)
+{
+	lv_anim_del(&heart_ChuangKou.lv_anim_zuo_image_jin, NULL);
 
 // 	// lvgl_heart_anim_zuo_image_shangxia(lv_obj_get_y(heart_ChuangKou.lvgl_zuo_image), lv_obj_get_height(lv_scr_act())-120);
-// 	// lv_obj_invalidate(lvgl_heart_main_cont);
-// }
+	lv_obj_invalidate(lvgl_heart_main_cont);
+}
 
 void lvgl_heart_anim_zuo_image_cb_Jin(void * arc, lv_anim_value_t v)
 {
@@ -22,22 +22,22 @@ void lvgl_heart_anim_zuo_image_cb_Jin(void * arc, lv_anim_value_t v)
 //左测图片进入动效
 void lvgl_heart_anim_zuo_image_jin(void)
 {
-	// lv_obj_set_x(heart_ChuangKou.lvgl_zuo_image, -(lv_obj_get_width(heart_ChuangKou.lvgl_zuo_image)));
+	lv_obj_set_x(heart_ChuangKou.lvgl_heart_image, -(lv_obj_get_width(heart_ChuangKou.lvgl_heart_image)));
 
 	lv_anim_init(&heart_ChuangKou.lv_anim_zuo_image_jin);
-	// lv_anim_set_ready_cb(&heart_ChuangKou.lv_anim_zuo_image_jin, lvgl_heart_anim_ready_zuo_image_cb_Jin);
+	lv_anim_set_ready_cb(&heart_ChuangKou.lv_anim_zuo_image_jin, lvgl_heart_anim_ready_zuo_image_cb_Jin);
 	lv_anim_set_exec_cb(&heart_ChuangKou.lv_anim_zuo_image_jin, lvgl_heart_anim_zuo_image_cb_Jin);
-	// lv_anim_set_values(
-	// 	&heart_ChuangKou.lv_anim_zuo_image_jin,
+	lv_anim_set_values(
+		&heart_ChuangKou.lv_anim_zuo_image_jin,
 
-	// 	-(lv_obj_get_width(heart_ChuangKou.lvgl_zuo_image)),
-	// 	0
+		-(lv_obj_get_width(heart_ChuangKou.lvgl_heart_image)),
+		0
 
-	// );
+	);
 	lv_anim_set_time(&heart_ChuangKou.lv_anim_zuo_image_jin, 300);
-	// lv_anim_set_var(&heart_ChuangKou.lv_anim_zuo_image_jin, heart_ChuangKou.lvgl_zuo_image);
+	lv_anim_set_var(&heart_ChuangKou.lv_anim_zuo_image_jin, heart_ChuangKou.lvgl_heart_image);
 
-	//lv_anim_set_playback_delay(&heart_ChuangKou.lv_anim_zuo_image_jin,1000);
+	// lv_anim_set_playback_delay(&heart_ChuangKou.lv_anim_zuo_image_jin,1000);
 
 	lv_anim_path_t path;
 	lv_anim_path_init(&path);
@@ -58,11 +58,11 @@ void lvgl_heart_anim_zuo_image_jin(void)
 }
 
 
-// void lvgl_heart_anim_ready_you_image_cb_Jin(lv_anim_t * anim)
-// {
-// 	lv_anim_del(&heart_ChuangKou.lv_anim_you_image_jin, NULL);
-// 	lvgl_heart_anim_you_image_shangxia(lv_obj_get_y(heart_ChuangKou.lvgl_you_image),lv_obj_get_height(lv_scr_act())-120);
-// }
+void lvgl_heart_anim_ready_you_image_cb_Jin(lv_anim_t * anim)
+{
+	lv_anim_del(&heart_ChuangKou.lv_anim_you_image_jin, NULL);
+	// lvgl_heart_anim_you_image_shangxia(lv_obj_get_y(heart_ChuangKou.lvgl_you_image),lv_obj_get_height(lv_scr_act())-120);
+}
 
 void lvgl_heart_anim_you_image_cb_Jin(void * arc, lv_anim_value_t v)
 {
@@ -74,10 +74,10 @@ void lvgl_heart_anim_you_image_cb_Jin(void * arc, lv_anim_value_t v)
 //右测图片进入动效
 void lvgl_heart_anim_you_image_jin(void)
 {
-	// lv_obj_set_x(heart_ChuangKou.lvgl_you_image, lv_obj_get_width(lv_scr_act()));
+	lv_obj_set_x(heart_ChuangKou.lvgl_steps_image, lv_obj_get_width(lv_scr_act()));
 
 	lv_anim_init(&heart_ChuangKou.lv_anim_you_image_jin);
-	// lv_anim_set_ready_cb(&heart_ChuangKou.lv_anim_you_image_jin, lvgl_heart_anim_ready_you_image_cb_Jin);
+	lv_anim_set_ready_cb(&heart_ChuangKou.lv_anim_you_image_jin, lvgl_heart_anim_ready_you_image_cb_Jin);
 	lv_anim_set_exec_cb(&heart_ChuangKou.lv_anim_you_image_jin, lvgl_heart_anim_you_image_cb_Jin);
 	lv_anim_set_values(
 		&heart_ChuangKou.lv_anim_you_image_jin,
@@ -86,7 +86,7 @@ void lvgl_heart_anim_you_image_jin(void)
 	);
 
 	lv_anim_set_time(&heart_ChuangKou.lv_anim_you_image_jin, 300);
-	// lv_anim_set_var(&heart_ChuangKou.lv_anim_you_image_jin, heart_ChuangKou.lvgl_you_image);
+	lv_anim_set_var(&heart_ChuangKou.lv_anim_you_image_jin, heart_ChuangKou.lvgl_steps_image);
 
 	//lv_anim_set_playback_delay(&heart_ChuangKou.lv_anim_you_image_jin,1000);
 
@@ -114,8 +114,8 @@ void lvgl_heart_anim_you_image_jin(void)
 void lvgl_heart_anim_Jin(void)
 {
 
-	// lvgl_heart_anim_zuo_image_jin();
-	// lvgl_heart_anim_you_image_jin();
+	lvgl_heart_anim_zuo_image_jin();
+	lvgl_heart_anim_you_image_jin();
 	// lvgl_heart_anim_yezi_image(lv_obj_get_width(lv_scr_act()), 100);
 
 }
@@ -125,13 +125,13 @@ void lvgl_heart_anim_ready_zuo_image_cb_shang(lv_anim_t * anim)
 {
 	lv_anim_del(&heart_ChuangKou.lv_anim_zuo_image_shangxia, NULL);
 
-	if (lv_obj_get_y(heart_ChuangKou.lvgl_zuo_image) == lv_obj_get_height(lv_scr_act())-100)
+	if (lv_obj_get_y(heart_ChuangKou.lvgl_heart_image) == lv_obj_get_height(lv_scr_act())-100)
 	{
-		lvgl_heart_anim_zuo_image_shangxia(lv_obj_get_y(heart_ChuangKou.lvgl_zuo_image), lv_obj_get_height(lv_scr_act())-120);
+		lvgl_heart_anim_zuo_image_shangxia(lv_obj_get_y(heart_ChuangKou.lvgl_heart_image), lv_obj_get_height(lv_scr_act())-120);
 	}
-	else if (lv_obj_get_y(heart_ChuangKou.lvgl_zuo_image) == lv_obj_get_height(lv_scr_act())-120)
+	else if (lv_obj_get_y(heart_ChuangKou.lvgl_heart_image) == lv_obj_get_height(lv_scr_act())-120)
 	{
-		lvgl_heart_anim_zuo_image_shangxia(lv_obj_get_y(heart_ChuangKou.lvgl_zuo_image), lv_obj_get_height(lv_scr_act())-100);
+		lvgl_heart_anim_zuo_image_shangxia(lv_obj_get_y(heart_ChuangKou.lvgl_heart_image), lv_obj_get_height(lv_scr_act())-100);
 	}
 }
 
@@ -156,7 +156,7 @@ void lvgl_heart_anim_zuo_image_shangxia(int dat1, int dat2)
 	);
 
 	lv_anim_set_time(&heart_ChuangKou.lv_anim_zuo_image_shangxia, 1000);
-	lv_anim_set_var(&heart_ChuangKou.lv_anim_zuo_image_shangxia, heart_ChuangKou.lvgl_zuo_image);
+	lv_anim_set_var(&heart_ChuangKou.lv_anim_zuo_image_shangxia, heart_ChuangKou.lvgl_heart_image);
 
 	//lv_anim_set_playback_delay(&heart_ChuangKou.lv_anim_zuo_image_shangxia,1000);
 
@@ -183,12 +183,12 @@ void lvgl_heart_anim_ready_you_image_cb_shang(lv_anim_t * anim)
 {
 	lv_anim_del(&heart_ChuangKou.lv_anim_you_image_shangxia, NULL);
 
-	if (lv_obj_get_y(heart_ChuangKou.lvgl_you_image) == lv_obj_get_height(lv_scr_act())-100)
+	if (lv_obj_get_y(heart_ChuangKou.lvgl_steps_image) == lv_obj_get_height(lv_scr_act())-100)
 	{
-		lvgl_heart_anim_you_image_shangxia(lv_obj_get_y(heart_ChuangKou.lvgl_you_image), lv_obj_get_height(lv_scr_act())-120);
-	}else if (lv_obj_get_y(heart_ChuangKou.lvgl_you_image) == lv_obj_get_height(lv_scr_act())-120)
+		lvgl_heart_anim_you_image_shangxia(lv_obj_get_y(heart_ChuangKou.lvgl_steps_image), lv_obj_get_height(lv_scr_act())-120);
+	}else if (lv_obj_get_y(heart_ChuangKou.lvgl_steps_image) == lv_obj_get_height(lv_scr_act())-120)
 	{
-		lvgl_heart_anim_you_image_shangxia(lv_obj_get_y(heart_ChuangKou.lvgl_you_image), lv_obj_get_height(lv_scr_act())-100);
+		lvgl_heart_anim_you_image_shangxia(lv_obj_get_y(heart_ChuangKou.lvgl_steps_image), lv_obj_get_height(lv_scr_act())-100);
 	}
 }
 
@@ -213,7 +213,7 @@ void lvgl_heart_anim_you_image_shangxia(int dat1,int dat2)
 	);
 
 	lv_anim_set_time(&heart_ChuangKou.lv_anim_you_image_shangxia, 1500);
-	lv_anim_set_var(&heart_ChuangKou.lv_anim_you_image_shangxia, heart_ChuangKou.lvgl_you_image);
+	lv_anim_set_var(&heart_ChuangKou.lv_anim_you_image_shangxia, heart_ChuangKou.lvgl_steps_image);
 
 	//lv_anim_set_playback_delay(&heart_ChuangKou.lv_anim_you_image_shangxia,1000);
 

@@ -41,8 +41,7 @@ typedef struct
 	lv_obj_t *lvgl_walk_image;
 	lv_obj_t *lvgl_heart_image;
 	lv_obj_t *lvgl_Sao2_image;
-	lv_obj_t *lvgl_zuo_image;
-	lv_obj_t *lvgl_you_image;
+	lv_obj_t *lvgl_steps_image;
 	lv_obj_t *lvgl_logo_image;
 	lv_obj_t *lvgl_yezi_image;
 

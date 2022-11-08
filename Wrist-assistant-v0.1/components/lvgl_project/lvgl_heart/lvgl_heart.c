@@ -11,17 +11,17 @@ _heart_ChuangKou heart_ChuangKou;
 lv_obj_t *lvgl_heart_main_cont = NULL;
 lv_style_t lvgl_heart_style;
 
-LV_IMG_DECLARE(walking_0)
-LV_IMG_DECLARE(walking_2)
-LV_IMG_DECLARE(walking_4)
+LV_IMG_DECLARE(heart)
+LV_IMG_DECLARE(bloodO2)
+LV_IMG_DECLARE(steps)
 LV_IMG_DECLARE(walking_6)
 
 const char*heart_TEXT[][SYSTEM_LANGUAGE_NUM] =
 {
 	{ "health", "health", "health", NULL},
-	{ "BPM:", "BPM:", "BPM:", NULL},
-	{ "SaO2:", "SaO2:", "SaO2:", NULL},
-	{ "steps:", "steps:", "steps:", NULL},
+	{ "   :", "BPM:", "BPM:", NULL},
+	{ "    :", "SaO2:", "SaO2:", NULL},
+	{ "     :", "steps:", "steps:", NULL},
 };
 
 
@@ -79,7 +79,7 @@ void lvgl_heart_Set_blood_oxygen(char *str)
 	{
 		//----创建容器----//
 		heart_ChuangKou.lvgl_cont_SaO2 = lv_cont_create(lvgl_heart_main_cont, NULL);
-		lv_obj_set_pos(heart_ChuangKou.lvgl_cont_SaO2,16, 97);
+		lv_obj_set_pos(heart_ChuangKou.lvgl_cont_SaO2,16, 120);
 		lv_obj_set_size(heart_ChuangKou.lvgl_cont_SaO2, 214, 32);
 		lv_obj_set_drag_parent(heart_ChuangKou.lvgl_cont_SaO2, true); //启用 / 禁用父对象可拖动
 		lv_obj_add_style(heart_ChuangKou.lvgl_cont_SaO2, LV_OBJ_PART_MAIN, &lvgl_touming_cont_style);
@@ -126,7 +126,7 @@ void lvgl_heart_Set_steps(char *str)
 	{
 		//----创建容器----//
 		heart_ChuangKou.lvgl_cont_step = lv_cont_create(lvgl_heart_main_cont, NULL);
-		lv_obj_set_pos(heart_ChuangKou.lvgl_cont_step,16, 138);
+		lv_obj_set_pos(heart_ChuangKou.lvgl_cont_step,16, 180);
 		lv_obj_set_size(heart_ChuangKou.lvgl_cont_step, 214, 32);
 		lv_obj_set_drag_parent(heart_ChuangKou.lvgl_cont_step, true); //启用 / 禁用父对象可拖动
 		lv_obj_add_style(heart_ChuangKou.lvgl_cont_step, LV_OBJ_PART_MAIN, &lvgl_touming_cont_style);
@@ -205,7 +205,7 @@ void lvgl_heart_event_cb(struct _lv_obj_t * obj, lv_event_t event)
 				else
 				if (lv_obj_get_x(lvgl_heart_main_cont) > 100)
 				{
-					lvgl_heart_close(0);
+					lvgl_heart_close(1);
 
 				}
 				else
@@ -245,11 +245,11 @@ void lvgl_heart_create(lv_obj_t * Fu)
 		lv_obj_set_pos(lvgl_heart_main_cont, 0, 0);
 		lv_obj_set_size(lvgl_heart_main_cont, lv_obj_get_width(Fu), lv_obj_get_height(Fu));
 
-		//lv_obj_set_drag_parent(lvgl_heart_main_cont, true); //启用 / 禁用父对象可拖动
-		// lv_obj_set_click(lvgl_heart_main_cont, true); //启用 / 禁用可点击
-		// lv_obj_set_drag(lvgl_heart_main_cont, true);//启用/禁用对象可拖动
-		// lv_obj_set_drag_dir(lvgl_heart_main_cont, LV_DRAG_DIR_ONE);//设置拖动方向
-		// lv_obj_set_drag_throw(lvgl_heart_main_cont, false);//启用/禁用拖动后是否有惯性移动
+		// lv_obj_set_drag_parent(lvgl_heart_main_cont, true); //启用 / 禁用父对象可拖动
+		lv_obj_set_click(lvgl_heart_main_cont, true); //启用 / 禁用可点击
+		lv_obj_set_drag(lvgl_heart_main_cont, true);//启用/禁用对象可拖动
+		lv_obj_set_drag_dir(lvgl_heart_main_cont, LV_DRAG_DIR_ONE);//设置拖动方向
+		lv_obj_set_drag_throw(lvgl_heart_main_cont, false);//启用/禁用拖动后是否有惯性移动
 
 		lv_obj_add_style(lvgl_heart_main_cont, LV_OBJ_PART_MAIN, &lvgl_heart_style);//设置样式
 		lv_obj_set_event_cb(lvgl_heart_main_cont, lvgl_heart_event_cb);//设置回调函数
@@ -272,19 +272,21 @@ void lvgl_heart_create(lv_obj_t * Fu)
 		if (heart_ChuangKou.lvgl_walk_image == NULL)
 		{
 			heart_ChuangKou.lvgl_walk_image = lv_img_create(lvgl_heart_main_cont, NULL);
-			lv_obj_set_pos(heart_ChuangKou.lvgl_walk_image, 30, -50);
-			lv_img_set_zoom(heart_ChuangKou.lvgl_walk_image, 50);
-			lv_img_set_src(heart_ChuangKou.lvgl_walk_image, &walking_0);
+			lv_obj_set_pos(heart_ChuangKou.lvgl_walk_image, -20, 100);
+			lv_img_set_zoom(heart_ChuangKou.lvgl_walk_image, 75);
+			// lv_obj_set_drag_parent(lvgl_heart_main_cont, true);
+			lv_img_set_src(heart_ChuangKou.lvgl_walk_image, &steps);
 		}
-		// ----walk图片----//
+		// // ----walk图片----//
 
-		// ----heart图片----//
+		// // ----heart图片----//
 		if (heart_ChuangKou.lvgl_heart_image == NULL)
 		{
 			heart_ChuangKou.lvgl_heart_image = lv_img_create(lvgl_heart_main_cont, NULL);
-			lv_obj_set_pos(heart_ChuangKou.lvgl_heart_image, -10, 0);
-			lv_img_set_zoom(heart_ChuangKou.lvgl_heart_image, 50);
-			lv_img_set_src(heart_ChuangKou.lvgl_heart_image, &walking_2);
+			lv_obj_set_pos(heart_ChuangKou.lvgl_heart_image, -20, -25);
+			lv_img_set_zoom(heart_ChuangKou.lvgl_heart_image, 70);
+			// lv_obj_set_drag_parent(lvgl_heart_main_cont, true);
+			lv_img_set_src(heart_ChuangKou.lvgl_heart_image, &heart);
 		}
 		// ----heart图片----//
 
@@ -292,9 +294,10 @@ void lvgl_heart_create(lv_obj_t * Fu)
 		if (heart_ChuangKou.lvgl_Sao2_image == NULL)
 		{
 			heart_ChuangKou.lvgl_Sao2_image = lv_img_create(lvgl_heart_main_cont, NULL);
-			lv_obj_set_pos(heart_ChuangKou.lvgl_Sao2_image, 0, 50);
-			lv_img_set_zoom(heart_ChuangKou.lvgl_Sao2_image, 50);
-			lv_img_set_src(heart_ChuangKou.lvgl_Sao2_image, &walking_4);
+			lv_obj_set_pos(heart_ChuangKou.lvgl_Sao2_image, -20,40);
+			// lv_obj_set_drag_parent(lvgl_heart_main_cont, true);
+			lv_img_set_zoom(heart_ChuangKou.lvgl_Sao2_image, 70);
+			lv_img_set_src(heart_ChuangKou.lvgl_Sao2_image, &bloodO2);
 		}
 		// ----sao2图片----//
 
@@ -308,21 +311,24 @@ void lvgl_heart_create(lv_obj_t * Fu)
 		// }
 		// // ----logo图片----//
 
-		// // ----左侧图片----//
-		// if (heart_ChuangKou.lvgl_zuo_image == NULL)
+		// ----heart图片----//
+		// if (heart_ChuangKou.lvgl_heart_image == NULL)
 		// {
-		// 	heart_ChuangKou.lvgl_zuo_image = lv_img_create(lvgl_heart_main_cont, NULL);
-		// 	lv_obj_set_pos(heart_ChuangKou.lvgl_zuo_image, 0, lv_obj_get_height(Fu)-100);
-		// 	lv_img_set_src(heart_ChuangKou.lvgl_zuo_image, NULL);
+		// 	heart_debug("左图\r\n");
+		// 	heart_ChuangKou.lvgl_heart_image = lv_img_create(lvgl_heart_main_cont, NULL);
+		// 	lv_obj_set_pos(heart_ChuangKou.lvgl_heart_image, 0, );
+		// 	lv_img_set_zoom(heart_ChuangKou.lvgl_heart_image, 50);
+		// 	lv_img_set_src(heart_ChuangKou.lvgl_heart_image, &heart);
 		// }
 		// // ----左侧图片----//
 
-		// // ----右侧图片----//
-		// if (heart_ChuangKou.lvgl_you_image == NULL)
+		// // ----steps图片----//
+		// if (heart_ChuangKou.lvgl_steps_image == NULL)
 		// {
-		// 	heart_ChuangKou.lvgl_you_image = lv_img_create(lvgl_heart_main_cont, NULL);
-		// 	lv_obj_set_pos(heart_ChuangKou.lvgl_you_image, 162, lv_obj_get_height(Fu)-100);
-		// 	lv_img_set_src(heart_ChuangKou.lvgl_you_image, NULL);
+		// 	heart_ChuangKou.lvgl_steps_image = lv_img_create(lvgl_heart_main_cont, NULL);
+		// 	lv_obj_set_pos(heart_ChuangKou.lvgl_steps_image, 162, lv_obj_get_height(Fu)-100);
+		// 	lv_img_set_zoom(heart_ChuangKou.lvgl_steps_image, 50);
+		// 	lv_img_set_src(heart_ChuangKou.lvgl_steps_image, &steps);
 		// }
 		// // ----右侧图片----//
 
@@ -373,18 +379,12 @@ void lvgl_heart_create(lv_obj_t * Fu)
 	lv_obj_set_pos(lvgl_heart_main_cont, 0, 0);
 	lvgl_set_obj_show(lvgl_heart_main_cont);
 
-	lvgl_heart_anim_Jin();
+	// lvgl_heart_anim_Jin();
 
 }
 
 void lvgl_heart_close(int dire)
 {
-
-	lvgl_task_delete(&heart_ChuangKou.lvgl_task);
-	heart_ChuangKou.lvgl_task = NULL;
-
-	// lvgl_heart_GongNeng_Data.point.y = lv_obj_get_y(lvgl_heart_main_cont);
-	// lvgl_heart_GongNeng_Data.point.x = lv_obj_get_x(lvgl_heart_main_cont);
 
     if (dire == 0)
 	{
@@ -392,6 +392,16 @@ void lvgl_heart_close(int dire)
 	} else {
 		lvgl_clock_create(lv_scr_act());
 	}
+
+	lvgl_task_delete(&heart_ChuangKou.lvgl_task);
+	// heart_ChuangKou.lvgl_task = NULL;
+	lv_obj_clean(lvgl_heart_main_cont);
+	lv_obj_del(lvgl_heart_main_cont);
+
+	// lvgl_heart_GongNeng_Data.point.y = lv_obj_get_y(lvgl_heart_main_cont);
+	// lvgl_heart_GongNeng_Data.point.x = lv_obj_get_x(lvgl_heart_main_cont);
+
+    
 
 }
 
@@ -402,7 +412,7 @@ void lvgl_heart_closed(void)
 	heart_debug("closed\r\n");
 
 	lvgl_heart_main_cont = NULL;
-	// memset(&heart_ChuangKou, 0x00, sizeof(_heart_ChuangKou));
+	memset(&heart_ChuangKou, 0x00, sizeof(_heart_ChuangKou));
 }
 
 
