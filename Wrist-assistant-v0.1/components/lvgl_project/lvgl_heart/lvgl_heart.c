@@ -26,9 +26,11 @@ const char*heart_TEXT[][SYSTEM_LANGUAGE_NUM] =
 
 
 //设置心率
-void lvgl_heart_Set_heart_rate(char *str)
+void lvgl_heart_Set_heart_rate(float bpm)
 {
-	char buf[20];
+	char str[20];
+	sprintf(str,"%.2f",bpm);
+	// char buf[20];
 	if (heart_ChuangKou.lvgl_cont_bpm == NULL)
 	{
 		//----创建容器----//
@@ -72,9 +74,11 @@ void lvgl_heart_Set_heart_rate(char *str)
 }
 
 //设置血氧
-void lvgl_heart_Set_blood_oxygen(char *str)
+void lvgl_heart_Set_blood_oxygen(float sao2)
 {
-	char buf[20];
+	// char buf[20];
+	char str[20];
+	sprintf(str,"%.2f",sao2);
 	if (heart_ChuangKou.lvgl_cont_SaO2 == NULL)
 	{
 		//----创建容器----//
@@ -100,28 +104,30 @@ void lvgl_heart_Set_blood_oxygen(char *str)
 		lv_label_set_anim_speed(heart_ChuangKou.lvgl_Label_biaoti_SaO2, 20);
 
 
-		heart_ChuangKou.lvgl_Label_bofang = lv_label_create(heart_ChuangKou.lvgl_cont_SaO2, heart_ChuangKou.lvgl_Label_biaoti_SaO2);
-		lv_obj_set_pos(heart_ChuangKou.lvgl_Label_bofang, 104, 0);
-		lv_obj_set_width(heart_ChuangKou.lvgl_Label_bofang, 110);
-		lv_obj_set_height(heart_ChuangKou.lvgl_Label_bofang, 32);
-		lv_label_set_align(heart_ChuangKou.lvgl_Label_bofang, LV_LABEL_ALIGN_LEFT);
+		heart_ChuangKou.lvgl_Label_Sao2 = lv_label_create(heart_ChuangKou.lvgl_cont_SaO2, heart_ChuangKou.lvgl_Label_biaoti_SaO2);
+		lv_obj_set_pos(heart_ChuangKou.lvgl_Label_Sao2, 104, 0);
+		lv_obj_set_width(heart_ChuangKou.lvgl_Label_Sao2, 110);
+		lv_obj_set_height(heart_ChuangKou.lvgl_Label_Sao2, 32);
+		lv_label_set_align(heart_ChuangKou.lvgl_Label_Sao2, LV_LABEL_ALIGN_LEFT);
 
 	}
 	if (str == NULL)
 	{
 
-		lv_label_set_text(heart_ChuangKou.lvgl_Label_bofang, "----");
+		lv_label_set_text(heart_ChuangKou.lvgl_Label_Sao2, "----");
 		return;
 	}
 
-	lv_label_set_text(heart_ChuangKou.lvgl_Label_bofang, str);
+	lv_label_set_text(heart_ChuangKou.lvgl_Label_Sao2, str);
 }
 
 
 //设置步数
-void lvgl_heart_Set_steps(char *str)
+void lvgl_heart_Set_steps(float step)
 {
-	char buf[20];
+	// char buf[20];
+	char str[20];
+	sprintf(str,"%.2f",step);
 	if (heart_ChuangKou.lvgl_cont_step == NULL)
 	{
 		//----创建容器----//
@@ -256,7 +262,7 @@ void lvgl_heart_create(lv_obj_t * Fu)
 
 
 		//----文字显示----//
-#if 1
+#if 0
 		lvgl_heart_Set_heart_rate("66666");
 		lvgl_heart_Set_blood_oxygen("66666");
 		lvgl_heart_Set_steps("888888");
@@ -426,7 +432,9 @@ void lvgl_heart_TaskCb(lv_task_t *t)
 	}
 	// lvgl_walk_icon(bmp_cnt);
 
-
+	lvgl_heart_Set_heart_rate(system_data.bpm_Data.heart_rate);
+	lvgl_heart_Set_blood_oxygen(system_data.bpm_Data.blood_oxygen);
+	lvgl_heart_Set_steps(system_data.bpm_Data.steps);
 
 	// if (++bmp_qian_time > 2)
 	// {

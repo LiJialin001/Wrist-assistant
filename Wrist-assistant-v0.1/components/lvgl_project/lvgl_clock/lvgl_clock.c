@@ -66,9 +66,10 @@ void lvgl_clock_event_cb(struct _lv_obj_t * obj, lv_event_t event)
 					lv_obj_set_y(lvgl_clock_main_cont, 0);
 				}
 				// else 
-				// if (lv_obj_get_y(lvgl_clock_main_cont) < -100)
+				// if (lv_obj_get_y(lvgl_clock_main_cont) < -50)
 				// {
-				// 	lvgl_clock_close(2);
+				// 	lvgl_clock_hidden();
+				// 	lvgl_SheZhi_create(lv_scr_act());
 				// }
 				else {
 					lv_obj_set_y(lvgl_clock_main_cont, 0);
@@ -114,9 +115,9 @@ lv_point_t line_points[12][2];
 lv_obj_t * line[12];
 void lvgl_clock_ShiZhong_Init(lv_obj_t * par,int x, int y)
 {
-	int x1 = 0, y1 = 0,x2 = 0, y2 = 0;
+	// int x1 = 0, y1 = 0,x2 = 0, y2 = 0;
 
-	int line_cnt = 0;
+	// int line_cnt = 0;
 
 
 	lv_style_set_line_width(&lvgl_clock_Line_BiaoPan_style, LV_STATE_DEFAULT, 2);
@@ -357,6 +358,15 @@ void lvgl_clock_create(lv_obj_t * Fu)
 
 	clock_anim_DongHua_Jin();
 }
+
+void lvgl_clock_hidden(void)
+{
+	lvgl_set_obj_hide(lvgl_clock_main_cont);
+	lv_obj_set_click(lvgl_clock_main_cont, false); //启用 / 禁用可点击
+	lv_obj_set_drag(lvgl_clock_main_cont, false);//启用/禁用对象可拖动
+	lv_obj_set_drag_dir(lvgl_clock_main_cont, LV_DRAG_DIR_ONE);//设置拖动方向
+}
+
 void lvgl_clock_close(int dire)
 {
 

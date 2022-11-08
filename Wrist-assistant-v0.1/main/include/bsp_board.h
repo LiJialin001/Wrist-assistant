@@ -21,10 +21,17 @@
 #define GPIO_TP_I2C_SCL     (GPIO_NUM_48)
 #define GPIO_TP_I2C_SDA     (GPIO_NUM_47)
 
+#if 1
+#define I2C_PORT_NUM_BPM     (1)
+#define GPIO_BPM_I2C_SCL     (GPIO_NUM_12)
+#define GPIO_BPM_I2C_SDA     (GPIO_NUM_13)
+#define I2C_FRQ 100000
+#else
 #define I2C_PORT_NUM_BPM     (1)
 #define GPIO_BPM_I2C_SCL     (GPIO_NUM_5)
 #define GPIO_BPM_I2C_SDA     (GPIO_NUM_4)
 #define I2C_FRQ 100000
+#endif
 
 
 // MPU6050

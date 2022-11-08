@@ -49,6 +49,7 @@ extern _clock_Data clock_Data;
 
 void lvgl_clock_create(lv_obj_t * Fu);
 void lvgl_clock_close(int dire);   // dire 0:左 1:右 2:向上 
+void lvgl_clock_hidden(void);
 void clock_TaskCb(lv_task_t *t);
 void clock_anim_DongHua_Jin(void);
 void clock_anim_Jin_cb(void * arc, lv_anim_value_t v);

@@ -20,8 +20,8 @@ static void init_task_handler(void *pvParameters)
 
 
     // mpu6050
-    i2c_mpu6050_init();
-    mpu6050_init();
+    // i2c_mpu6050_init();
+    // mpu6050_init();
 
     // lcd
     i2c2_init();
@@ -39,52 +39,54 @@ static void init_task_handler(void *pvParameters)
     printf_memory();
 
 
-    //Init I2C_NUM_0
-    // i2c_bpm_init();
-    //Init sensor at I2C_NUM_0
-    // if (max30102_init( &max30102, I2C_PORT_NUM_BPM,
-    //                MAX30102_DEFAULT_OPERATING_MODE,
-    //                MAX30102_DEFAULT_SAMPLING_RATE,
-    //                MAX30102_DEFAULT_LED_PULSE_WIDTH,
-    //                MAX30102_DEFAULT_IR_LED_CURRENT,
-    //                MAX30102_DEFAULT_START_RED_LED_CURRENT,
-    //                MAX30102_DEFAULT_MEAN_FILTER_SIZE,
-    //                MAX30102_DEFAULT_PULSE_BPM_SAMPLE_SIZE,
-    //                MAX30102_DEFAULT_ADC_RANGE, 
-    //                MAX30102_DEFAULT_SAMPLE_AVERAGING,
-    //                MAX30102_DEFAULT_ROLL_OVER,
-    //                MAX30102_DEFAULT_ALMOST_FULL,
-    //                false )==ESP_OK) {
-    //                     main_debug("MAX30102 Init OK\r\n");
-    //                } else {
-    //                     main_debug("MAX30102 not found\r\n");
-    //                }
-	// main_debug("初始化结束\r\n");
+    // Init I2C_NUM_0
+    i2c_bpm_init();
+    // Init sensor at I2C_NUM_0
+    if (max30102_init( &max30102, I2C_PORT_NUM_BPM,
+                   MAX30102_DEFAULT_OPERATING_MODE,
+                   MAX30102_DEFAULT_SAMPLING_RATE,
+                   MAX30102_DEFAULT_LED_PULSE_WIDTH,
+                   MAX30102_DEFAULT_IR_LED_CURRENT,
+                   MAX30102_DEFAULT_START_RED_LED_CURRENT,
+                   MAX30102_DEFAULT_MEAN_FILTER_SIZE,
+                   MAX30102_DEFAULT_PULSE_BPM_SAMPLE_SIZE,
+                   MAX30102_DEFAULT_ADC_RANGE, 
+                   MAX30102_DEFAULT_SAMPLE_AVERAGING,
+                   MAX30102_DEFAULT_ROLL_OVER,
+                   MAX30102_DEFAULT_ALMOST_FULL,
+                   false )==ESP_OK) {
+                        main_debug("MAX30102 Init OK\r\n");
+                   } else {
+                        main_debug("MAX30102 not found\r\n");
+                   }
+	main_debug("初始化结束\r\n");
 
-    // printf("MAX30102 Test\n");
-    // max30102_data_t result = {};
+    printf("MAX30102 Test\n");
+    max30102_data_t result = {};
 
     measurement_out_t measurement_out;
 
 	while(1)
 	{
         //Update sensor, saving to "result"
-        // if(max30102_update(&max30102, &result)==ESP_OK) {
-        //     if(result.pulse_detected) {
-        //         printf("BEAT\n");
-        //         printf("BPM: %f | SpO2: %f%%\n", result.heart_bpm, result.spO2);
-        //     }
-        // } else {
-        //     main_debug("MAX30102 not found\r\n");
-        // }
-        measurement_out = mpu6050_get_value();
+        if(max30102_update(&max30102, &result)==ESP_OK) {
+            if(result.pulse_detected) {
+                system_data.bpm_Data.heart_rate = result.heart_bpm;
+                system_data.bpm_Data.blood_oxygen = result.spO2;
+                main_debug("BEAT\r\n");
+                main_debug("BPM: %f | SpO2: %f%%\r\n", result.heart_bpm, result.spO2);
+            }
+        } else {
+            main_debug("MAX30102 not found\r\n");
+        }
+        // measurement_out = mpu6050_get_value();
         // printf("accel_xout:%d\t;", measurement_out.accel_out.accel_xout);
         // printf("accel_yout:%d\t;", measurement_out.accel_out.accel_yout);
         // printf("accel_zout:%d;\n", measurement_out.accel_out.accel_zout);
         // printf("gyro_xout:%d\t;", measurement_out.gyro_out.gyro_xout);
         // printf("gyro_yout:%d\t;", measurement_out.gyro_out.gyro_yout);
         // printf("gyro_zout:%d;\n", measurement_out.gyro_out.gyro_zout);
-		vTaskDelay(100 / portTICK_PERIOD_MS);
+		vTaskDelay(10 / portTICK_PERIOD_MS);
 	}
 
 	vTaskDelete(NULL);
@@ -98,7 +100,6 @@ void app_main()
             NULL,
             configMAX_PRIORITIES-1,
             NULL);
-
 }
 
 void ptintf_memory(char *file,int len)

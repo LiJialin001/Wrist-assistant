@@ -53,7 +53,7 @@ typedef struct
 	//血氧
 	lv_obj_t *lvgl_cont_SaO2;
 	lv_obj_t *lvgl_Label_biaoti_SaO2;
-	lv_obj_t *lvgl_Label_bofang;
+	lv_obj_t *lvgl_Label_Sao2;
 
 	//步数
 	lv_obj_t *lvgl_cont_step;
@@ -91,9 +91,9 @@ void lvgl_heart_closed(void);
 void lvgl_heart_TaskCb(lv_task_t *t);
 
 
-void lvgl_heart_Set_heart_rate(char *str);
-void lvgl_heart_Set_blood_oxygen(char *str);
-void lvgl_heart_Set_steps(char *str);
+void lvgl_heart_Set_heart_rate(float bpm);
+void lvgl_heart_Set_blood_oxygen(float sao2);
+void lvgl_heart_Set_steps(float step);
 
 
 

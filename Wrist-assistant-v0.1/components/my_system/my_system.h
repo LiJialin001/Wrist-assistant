@@ -26,11 +26,9 @@
 typedef struct
 {
   char id[20];
-	char heart_rate[20];         
-	char blood_oxygen[20];        
-  char steps[20];       
-  char wenzhang[20];       //文章播放量
-
+	float heart_rate;         
+	float blood_oxygen;        
+  int steps;       
 
 }_bpm_Data;
 
