@@ -3,12 +3,13 @@
 
 max30102_config_t max30102 = {};
 
+uint16_t step;
 
 static void init_task_handler(void *pvParameters)
 {
 	main_debug("-------------开始初始化----------------\r\n");
 	main_debug("编译时间:%s %s\r\n", __DATE__, __TIME__);
-	// main_debug("esp32 sdk version :%s\r\n", esp_get_idf_version());
+	main_debug("esp32 sdk version :%s\r\n", esp_get_idf_version());
 
 	// bsp_key_init();
     // bsp_power_init();
@@ -20,8 +21,8 @@ static void init_task_handler(void *pvParameters)
 
 
     // mpu6050
-    // i2c_mpu6050_init();
-    // mpu6050_init();
+    i2c_mpu6050_init();
+    mpu6050_init();
 
     // lcd
     i2c2_init();
@@ -39,54 +40,71 @@ static void init_task_handler(void *pvParameters)
     printf_memory();
 
 
-    // Init I2C_NUM_0
-    i2c_bpm_init();
-    // Init sensor at I2C_NUM_0
-    if (max30102_init( &max30102, I2C_PORT_NUM_BPM,
-                   MAX30102_DEFAULT_OPERATING_MODE,
-                   MAX30102_DEFAULT_SAMPLING_RATE,
-                   MAX30102_DEFAULT_LED_PULSE_WIDTH,
-                   MAX30102_DEFAULT_IR_LED_CURRENT,
-                   MAX30102_DEFAULT_START_RED_LED_CURRENT,
-                   MAX30102_DEFAULT_MEAN_FILTER_SIZE,
-                   MAX30102_DEFAULT_PULSE_BPM_SAMPLE_SIZE,
-                   MAX30102_DEFAULT_ADC_RANGE, 
-                   MAX30102_DEFAULT_SAMPLE_AVERAGING,
-                   MAX30102_DEFAULT_ROLL_OVER,
-                   MAX30102_DEFAULT_ALMOST_FULL,
-                   false )==ESP_OK) {
-                        main_debug("MAX30102 Init OK\r\n");
-                   } else {
-                        main_debug("MAX30102 not found\r\n");
-                   }
+    // // Init I2C_NUM_0
+    // i2c_bpm_init();
+    // // Init sensor at I2C_NUM_0
+    // if (max30102_init( &max30102, I2C_PORT_NUM_BPM,
+    //                MAX30102_DEFAULT_OPERATING_MODE,
+    //                MAX30102_DEFAULT_SAMPLING_RATE,
+    //                MAX30102_DEFAULT_LED_PULSE_WIDTH,
+    //                MAX30102_DEFAULT_IR_LED_CURRENT,
+    //                MAX30102_DEFAULT_START_RED_LED_CURRENT,
+    //                MAX30102_DEFAULT_MEAN_FILTER_SIZE,
+    //                MAX30102_DEFAULT_PULSE_BPM_SAMPLE_SIZE,
+    //                MAX30102_DEFAULT_ADC_RANGE, 
+    //                MAX30102_DEFAULT_SAMPLE_AVERAGING,
+    //                MAX30102_DEFAULT_ROLL_OVER,
+    //                MAX30102_DEFAULT_ALMOST_FULL,
+    //                false )==ESP_OK) {
+    //                     main_debug("MAX30102 Init OK\r\n");
+    //                } else {
+    //                     main_debug("MAX30102 not found\r\n");
+    //                }
 	main_debug("初始化结束\r\n");
 
-    printf("MAX30102 Test\n");
+    // printf("MAX30102 Test\n");
     max30102_data_t result = {};
 
     measurement_out_t measurement_out;
 
+    static uint8_t step_time_count = 0;
+
 	while(1)
 	{
         //Update sensor, saving to "result"
-        if(max30102_update(&max30102, &result)==ESP_OK) {
-            if(result.pulse_detected) {
-                system_data.bpm_Data.heart_rate = result.heart_bpm;
-                system_data.bpm_Data.blood_oxygen = result.spO2;
-                main_debug("BEAT\r\n");
-                main_debug("BPM: %f | SpO2: %f%%\r\n", result.heart_bpm, result.spO2);
-            }
-        } else {
-            main_debug("MAX30102 not found\r\n");
-        }
-        // measurement_out = mpu6050_get_value();
+        // if(max30102_update(&max30102, &result)==ESP_OK) {
+        //     if(result.pulse_detected) {
+        //         system_data.bpm_Data.heart_rate = result.heart_bpm;
+        //         system_data.bpm_Data.blood_oxygen = result.spO2;
+        //         main_debug("BEAT\r\n");
+        //         main_debug("BPM: %f | SpO2: %f%%\r\n", result.heart_bpm, result.spO2);
+        //     }
+        // } else {
+        //     main_debug("MAX30102 not found\r\n");
+        // }
+        measurement_out = mpu6050_get_value();
         // printf("accel_xout:%d\t;", measurement_out.accel_out.accel_xout);
         // printf("accel_yout:%d\t;", measurement_out.accel_out.accel_yout);
         // printf("accel_zout:%d;\n", measurement_out.accel_out.accel_zout);
-        // printf("gyro_xout:%d\t;", measurement_out.gyro_out.gyro_xout);
-        // printf("gyro_yout:%d\t;", measurement_out.gyro_out.gyro_yout);
-        // printf("gyro_zout:%d;\n", measurement_out.gyro_out.gyro_zout);
-		vTaskDelay(10 / portTICK_PERIOD_MS);
+        printf("gyro_xout:%d\t;", measurement_out.gyro_out.gyro_xout);
+        printf("gyro_yout:%d\t;", measurement_out.gyro_out.gyro_yout);
+        printf("gyro_zout:%d;\n", measurement_out.gyro_out.gyro_zout);
+
+
+        // detect_step();
+
+        // step_time_count ++;
+        // if(step_time_count == 6)   //300ms
+        // {
+        //     step_time_count = 0;
+        //     if(system_data.bpm_Data.steps != 0)
+        //     {
+        //         system_data.bpm_Data.steps = 0;
+        //         step ++;
+        //         main_debug("step: %d \n", step);
+        //     }
+        // }
+		vTaskDelay(1 / portTICK_PERIOD_MS);
 	}
 
 	vTaskDelete(NULL);

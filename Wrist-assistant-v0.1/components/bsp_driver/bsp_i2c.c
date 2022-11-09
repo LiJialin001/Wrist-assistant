@@ -24,6 +24,12 @@ static esp_err_t i2c_mpu6050_master_init(void)
     return i2c_driver_install(MPU6050_I2C_PORT_NUM, I2C_MODE_MASTER, 0, 0, 0);
 }
 
+void i2c_mpu_bpm_uninit(void)
+{
+    ESP_ERROR_CHECK(i2c_driver_delete(MPU6050_I2C_PORT_NUM));
+    bsp_i2c_debug("I2C mup bpm de-initialized successfully");
+}
+
 
 static esp_err_t i2c_bpm_master_init(void)
 {

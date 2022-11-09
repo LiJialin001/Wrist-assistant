@@ -22,7 +22,7 @@ esp_err_t nvs_init(void)
         err = nvs_flash_init();
     }else
     {
-        my_nvs_debug("初始化成功\r\n");
+        my_nvs_debug("my_nvs初始化成功\r\n");
 
     }
 
